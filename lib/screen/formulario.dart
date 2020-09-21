@@ -40,7 +40,7 @@ class _FormularioComponent extends State<FormularioComponent> {
   
   DateTime selectedDate = DateTime.now();
   List parentescos = ['Pai', 'Avó', 'Mãe', 'Avô'];
-  // int _value = 0;
+  int _value = 0;
   final _formKey = GlobalKey<FormState>();
   final bool validate = false;
   String nome = '';
@@ -64,6 +64,7 @@ class _FormularioComponent extends State<FormularioComponent> {
         @override
         Widget build(BuildContext context) {
           return Form(
+            key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -78,7 +79,6 @@ class _FormularioComponent extends State<FormularioComponent> {
                     if (value.isEmpty) {
                       return 'Please enter some text';
                     }
-                    print('BATATATAT');
                     nome = value;
                     return null;
                   }
@@ -87,9 +87,13 @@ class _FormularioComponent extends State<FormularioComponent> {
                   decoration: const InputDecoration(
                     hintText: 'Enter your email',
                   ),
-                  onSaved: (String val) {
-                    nomeCompleto = val;
-                  },
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    nomeCompleto = value;
+                    return null;
+                  }
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20.0),
@@ -112,50 +116,56 @@ class _FormularioComponent extends State<FormularioComponent> {
                     ],
                   )
                 ),
-                // DropdownButton(
-                //   value: _value,
-                //   items: parentescos.asMap().entries.map((parentesco) {
-                //       return DropdownMenuItem(
-                //         child: Text(parentesco.value),
-                //         value: (parentesco.key),
-                //       );
-                //   }).toList(),
-                //   onChanged: (value) {
-                //     print("DropdownButton $value");
-                //     setState(() {
-                //       _value = value;
-                //     });
-                // }),
+                DropdownButton(
+                  value: _value,
+                  items: parentescos.asMap().entries.map((parentesco) {
+                      return DropdownMenuItem(
+                        child: Text(parentesco.value),
+                        value: (parentesco.key),
+                      );
+                  }).toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      _value = value;
+                    });
+                }),
                 TextFormField(
                   decoration: const InputDecoration(
                     hintText: 'Enter your email',
                   ),
-                  onSaved: (String val) {
-                    print("TESTETETETETE");
-                    descricao = val;
-                  },
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    descricao = value;
+                    return null;
+                  }
                 ),
                 TextFormField(
                   decoration: const InputDecoration(
                     hintText: 'Enter your email',
                   ),
-                  onSaved: (String val) {
-                    mensagem = val;
-                  },
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    mensagem = value;
+                    return null;
+                  }
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20.0),
                   child: RaisedButton(
                     onPressed: () {
-                      print("Nome $nome");
-                      print("Completo $nomeCompleto");
-                      print("Descrição $descricao");
-                      print("Mensagem $mensagem");
+
                       // Validate will return true if the form is valid, or false if
                       // the form is invalid.
-                      // if (_formKey.currentState.validate()) {
-                      //   print("Nome $nome");
-                      // }
+                      if (_formKey.currentState.validate()) {
+                        print("Nome $nome");
+                        print("Completo $nomeCompleto");
+                        print("Descrição $descricao");
+                        print("Mensagem $mensagem");
+                      }
                     },
                     child: Text('Submit'),
                   ),
