@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 /// This Widget is the main application widget.
 class Formulario extends StatelessWidget {
+  // final bool _validate = false;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class Formulario extends StatelessWidget {
           child: new Container(
             margin: new EdgeInsets.all(15.0),
             child: new Form(
-              // key: _key,
+              // key: _formKey,
               // autovalidate: _validate,
               child: FormularioComponent(),
             ),
@@ -34,11 +35,19 @@ class FormularioComponent extends StatefulWidget {
 
 /// This is the stateless widget that the main application instantiates.
 class _FormularioComponent extends State<FormularioComponent> {
+
   
-  final _formKey = GlobalKey<FormState>();
+  
   DateTime selectedDate = DateTime.now();
-  int _value = 1;
+  List parentescos = ['Pai', 'Avó', 'Mãe', 'Avô'];
+  // int _value = 0;
+  final _formKey = GlobalKey<FormState>();
+  final bool validate = false;
   String nome = '';
+  String nomeCompleto = '';
+  String descricao = '';
+  String mensagem = '';
+
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
@@ -55,7 +64,6 @@ class _FormularioComponent extends State<FormularioComponent> {
         @override
         Widget build(BuildContext context) {
           return Form(
-            key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -63,34 +71,24 @@ class _FormularioComponent extends State<FormularioComponent> {
                   decoration: const InputDecoration(
                     hintText: 'Enter your email',
                   ),
+                  onSaved: (String val) {
+                    nome = val;
+                  },
                   validator: (value) {
                     if (value.isEmpty) {
                       return 'Please enter some text';
                     }
+                    print('BATATATAT');
                     nome = value;
                     return null;
-                  },
+                  }
                 ),
                 TextFormField(
                   decoration: const InputDecoration(
                     hintText: 'Enter your email',
                   ),
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Please enter some text';
-                    }
-                    return null;
-                  },
-                ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    hintText: 'Enter your email',
-                  ),
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Please enter some text';
-                    }
-                    return null;
+                  onSaved: (String val) {
+                    nomeCompleto = val;
                   },
                 ),
                 Padding(
@@ -114,51 +112,35 @@ class _FormularioComponent extends State<FormularioComponent> {
                     ],
                   )
                 ),
-                DropdownButton(
-                  value: _value,
-                  items: [
-                    DropdownMenuItem(
-                      child: Text("First Item"),
-                      value: 1,
-                    ),
-                    DropdownMenuItem(
-                      child: Text("Second Item"),
-                      value: 2,
-                    ),
-                    DropdownMenuItem(
-                      child: Text("Third Item"),
-                      value: 3
-                    ),
-                    DropdownMenuItem(
-                        child: Text("Fourth Item"),
-                        value: 4
-                    )
-                  ],
-                  onChanged: (value) {
-                    setState(() {
-                      _value = value;
-                    });
-                }),
+                // DropdownButton(
+                //   value: _value,
+                //   items: parentescos.asMap().entries.map((parentesco) {
+                //       return DropdownMenuItem(
+                //         child: Text(parentesco.value),
+                //         value: (parentesco.key),
+                //       );
+                //   }).toList(),
+                //   onChanged: (value) {
+                //     print("DropdownButton $value");
+                //     setState(() {
+                //       _value = value;
+                //     });
+                // }),
                 TextFormField(
                   decoration: const InputDecoration(
                     hintText: 'Enter your email',
                   ),
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Please enter some text';
-                    }
-                    return null;
+                  onSaved: (String val) {
+                    print("TESTETETETETE");
+                    descricao = val;
                   },
                 ),
                 TextFormField(
                   decoration: const InputDecoration(
                     hintText: 'Enter your email',
                   ),
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Please enter some text';
-                    }
-                    return null;
+                  onSaved: (String val) {
+                    mensagem = val;
                   },
                 ),
                 Padding(
@@ -166,6 +148,9 @@ class _FormularioComponent extends State<FormularioComponent> {
                   child: RaisedButton(
                     onPressed: () {
                       print("Nome $nome");
+                      print("Completo $nomeCompleto");
+                      print("Descrição $descricao");
+                      print("Mensagem $mensagem");
                       // Validate will return true if the form is valid, or false if
                       // the form is invalid.
                       // if (_formKey.currentState.validate()) {
