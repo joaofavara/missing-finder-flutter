@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 /// This Widget is the main application widget.
 class Formulario extends StatelessWidget {
   // final bool _validate = false;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -35,31 +36,44 @@ class FormularioComponent extends StatefulWidget {
 
 /// This is the stateless widget that the main application instantiates.
 class _FormularioComponent extends State<FormularioComponent> {
-
-  
-  
-  DateTime selectedDate = DateTime.now();
-  List parentescos = ['Pai', 'Avó', 'Mãe', 'Avô'];
-  int _value = 0;
   final _formKey = GlobalKey<FormState>();
   final bool validate = false;
+
+  DateTime dataDoDesaparecimento = DateTime.now();
+  DateTime dataDeAniversario = DateTime.now();
+  List parentescos = ['Pai', 'Avó', 'Mãe', 'Avô'];
+  int parentesco = 0;
   String nome = '';
   String nomeCompleto = '';
   String descricao = '';
   String mensagem = '';
 
 
-  Future<void> _selectDate(BuildContext context) async {
+  Future<void> _dataDoDesaparecimento(BuildContext context) async {
     final DateTime picked = await showDatePicker(
-        context: context,
-        initialDate: selectedDate,
-        firstDate: DateTime(2015, 8),
-        lastDate: DateTime(2101));
-    if (picked != null && picked != selectedDate)
-      setState(() {
-              selectedDate = picked;
-            });
-        }
+          context: context,
+          initialDate: dataDoDesaparecimento,
+          firstDate: DateTime(2015, 8),
+          lastDate: DateTime(2101)
+        );
+        if (picked != null && picked != dataDoDesaparecimento)
+          setState(() {
+                  dataDoDesaparecimento = picked;
+          });
+  }
+
+  Future<void> _dataDeAniversario(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+          context: context,
+          initialDate: dataDeAniversario,
+          firstDate: DateTime(2015, 8),
+          lastDate: DateTime(2101)
+        );
+        if (picked != null && picked != dataDeAniversario)
+          setState(() {
+                  dataDeAniversario = picked;
+          });
+   }
       
         @override
         Widget build(BuildContext context) {
@@ -70,7 +84,7 @@ class _FormularioComponent extends State<FormularioComponent> {
               children: <Widget>[
                 TextFormField(
                   decoration: const InputDecoration(
-                    hintText: 'Enter your email',
+                    hintText: 'Nome',
                   ),
                   onSaved: (String val) {
                     nome = val;
@@ -85,7 +99,7 @@ class _FormularioComponent extends State<FormularioComponent> {
                 ),
                 TextFormField(
                   decoration: const InputDecoration(
-                    hintText: 'Enter your email',
+                    hintText: 'Nome Completo',
                   ),
                   validator: (value) {
                     if (value.isEmpty) {
@@ -100,24 +114,31 @@ class _FormularioComponent extends State<FormularioComponent> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      Text("${selectedDate.toLocal()}".split(' ')[0]),
+                      Text("${dataDeAniversario.toLocal()}".split(' ')[0]),
                       SizedBox(height: 20.0,),
                       RaisedButton(
-                        onPressed: () => _selectDate(context),
-                        child: Text('Select date'),
+                        onPressed: () => _dataDeAniversario(context),
+                        child: Text('Data de Aniversario'),
                       ),
-
-                      Text("${selectedDate.toLocal()}".split(' ')[0]),
+                    ],
+                  )
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Text("${dataDoDesaparecimento.toLocal()}".split(' ')[0]),
                       SizedBox(height: 20.0,),
                       RaisedButton(
-                        onPressed: () => _selectDate(context),
-                        child: Text('Select date'),
+                        onPressed: () => _dataDoDesaparecimento(context),
+                        child: Text('Data do Desaparecimento'),
                       ),
                     ],
                   )
                 ),
                 DropdownButton(
-                  value: _value,
+                  value: parentesco,
                   items: parentescos.asMap().entries.map((parentesco) {
                       return DropdownMenuItem(
                         child: Text(parentesco.value),
@@ -126,12 +147,12 @@ class _FormularioComponent extends State<FormularioComponent> {
                   }).toList(),
                   onChanged: (value) {
                     setState(() {
-                      _value = value;
+                      parentesco = value;
                     });
                 }),
                 TextFormField(
                   decoration: const InputDecoration(
-                    hintText: 'Enter your email',
+                    hintText: 'Descrição',
                   ),
                   validator: (value) {
                     if (value.isEmpty) {
@@ -143,7 +164,7 @@ class _FormularioComponent extends State<FormularioComponent> {
                 ),
                 TextFormField(
                   decoration: const InputDecoration(
-                    hintText: 'Enter your email',
+                    hintText: 'Mensagem para a pessoa desaparecida',
                   ),
                   validator: (value) {
                     if (value.isEmpty) {
@@ -165,6 +186,9 @@ class _FormularioComponent extends State<FormularioComponent> {
                         print("Completo $nomeCompleto");
                         print("Descrição $descricao");
                         print("Mensagem $mensagem");
+                        print(parentescos[parentesco]);
+                        print("Data $dataDoDesaparecimento");
+                        print("Data $dataDeAniversario");
                       }
                     },
                     child: Text('Submit'),
