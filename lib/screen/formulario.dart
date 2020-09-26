@@ -1,5 +1,8 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 
 /// This Widget is the main application widget.
@@ -177,7 +180,7 @@ class _FormularioComponent extends State<FormularioComponent> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20.0),
                   child: RaisedButton(
-                    onPressed: () {
+                    onPressed: () async {
 
                       // Validate will return true if the form is valid, or false if
                       // the form is invalid.
@@ -189,6 +192,26 @@ class _FormularioComponent extends State<FormularioComponent> {
                         print(parentescos[parentesco]);
                         print("Data $dataDoDesaparecimento");
                         print("Data $dataDeAniversario");
+                        const url = 'http://10.0.2.2:5000/api/people/missed';
+                        var body = {
+                              "nome": nome,
+                              "nascimento": DateFormat('yyyy-MM-dd').format(dataDeAniversario),
+                              "data_desaparecimento": DateFormat('yyyy-MM-dd').format(dataDoDesaparecimento),
+                              "parentesco": parentescos[parentesco],
+                              "mensagem_de_aviso": descricao,
+                              "mensagem_para_desaparecido": mensagem,
+                              "endereco": {
+                                  "rua": "rua",
+                                  "numero": 1,
+                                  "lat": 123,
+                                  "long": 123
+                              },
+                              "usuario_id": 1
+                          };
+                        await http.post(
+                          url,
+                          body: json.encode(body)
+                        );
                       }
                     },
                     child: Text('Submit'),
