@@ -57,8 +57,8 @@ class _FormularioComponent extends State<FormularioComponent> {
 
   Future<void> _getCurrentUserLocation() async {
     final locData = await Location().getLocation();
-    latitude = locData.latitude as String;
-    longitude = locData.longitude as String;
+    latitude = locData.latitude.toString();
+    longitude = locData.longitude.toString();
 
     final staticMapImageUrl = 'https://maps.googleapis.com/maps/api/staticmap?center=$latitude,$longitude&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C$latitude,$longitude&key=?';
 
@@ -192,9 +192,9 @@ class _FormularioComponent extends State<FormularioComponent> {
                     return null;
                   }
                 ),
-                SizedBox(height: 10),
                 Column(
                   children: <Widget>[
+                    SizedBox(height: 10),
                     Container(
                       child: _previewImageUrl == null ? Text('Localizacao nao informada') : 
                       Image.network(
