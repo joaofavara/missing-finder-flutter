@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+import 'package:location/location.dart';
 
 
 /// This Widget is the main application widget.
@@ -50,7 +51,21 @@ class _FormularioComponent extends State<FormularioComponent> {
   String nomeCompleto = '';
   String descricao = '';
   String mensagem = '';
+  String _previewImageUrl;
+  var longitude = '';
+  var latitude = '';
 
+  Future<void> _getCurrentUserLocation() async {
+    final locData = await Location().getLocation();
+    latitude = locData.latitude as String;
+    longitude = locData.longitude as String;
+
+    final staticMapImageUrl = 'https://maps.googleapis.com/maps/api/staticmap?center=$latitude,$longitude&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C$latitude,$longitude&key=?';
+
+    setState(() {
+      _previewImageUrl = staticMapImageUrl;
+    });
+  }
 
   Future<void> _dataDoDesaparecimento(BuildContext context) async {
     final DateTime picked = await showDatePicker(
@@ -177,21 +192,40 @@ class _FormularioComponent extends State<FormularioComponent> {
                     return null;
                   }
                 ),
+                SizedBox(height: 10),
+                Column(
+                  children: <Widget>[
+                    Container(
+                      child: _previewImageUrl == null ? Text('Localizacao nao informada') : 
+                      Image.network(
+                        _previewImageUrl,
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        FlatButton.icon(
+                          onPressed: _getCurrentUserLocation,
+                          icon: Icon(Icons.location_on),
+                          label: Text('Localização Atual'),
+                          textColor: Theme.of(context).primaryColor,
+                        ),
+                         FlatButton.icon(
+                          onPressed: null,
+                          icon: Icon(Icons.map),
+                          label: Text('Localização Atual'),
+                          textColor: Theme.of(context).primaryColor,
+                        )
+                      ],
+                    )
+                  ],
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20.0),
                   child: RaisedButton(
                     onPressed: () async {
-
                       // Validate will return true if the form is valid, or false if
                       // the form is invalid.
                       if (_formKey.currentState.validate()) {
-                        print("Nome $nome");
-                        print("Completo $nomeCompleto");
-                        print("Descrição $descricao");
-                        print("Mensagem $mensagem");
-                        print(parentescos[parentesco]);
-                        print("Data $dataDoDesaparecimento");
-                        print("Data $dataDeAniversario");
                         const url = 'http://10.0.2.2:5000/api/people/missed';
                         var body = {
                               "nome": nome,
@@ -201,10 +235,9 @@ class _FormularioComponent extends State<FormularioComponent> {
                               "mensagem_de_aviso": descricao,
                               "mensagem_para_desaparecido": mensagem,
                               "endereco": {
-                                  "rua": "rua",
-                                  "numero": 1,
-                                  "lat": 123,
-                                  "long": 123
+                                  "imageUrl": _previewImageUrl,
+                                  "lat": latitude,
+                                  "long": longitude
                               },
                               "usuario_id": 1
                           };
