@@ -35,12 +35,10 @@ class MyApp extends StatelessWidget {
 }
 
 class Button extends StatelessWidget {
-  void changeScreen(BuildContext context) {
-    Navigator.of(context).push(
+  Future<void> changeScreen(BuildContext context) async {
+    await Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (_) {
-          return Formulario();
-        }
+        builder: (ctx) => Formulario()
       )
     );
   }
@@ -49,13 +47,19 @@ class Button extends StatelessWidget {
   Widget build( BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-           title: Text('Teste!'),
+           title: Text('Missing Finder'),
         ),
-        body: ButtonBar(
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
           FlatButton(
-            child: Text('Ok'),
+            child: Text('Uma pessoas esta desaparecida!'),
             color: Colors.blue,
+            onPressed: () => changeScreen(context),
+          ),
+          FlatButton(
+            child: Text('Encontrei uma pessoa!'),
+            color: Colors.grey,
             onPressed: () => changeScreen(context),
           ),
         ]

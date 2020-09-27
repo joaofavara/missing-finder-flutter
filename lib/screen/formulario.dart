@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:app/screen/mapScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:location/location.dart';
@@ -8,22 +10,17 @@ import 'package:location/location.dart';
 
 /// This Widget is the main application widget.
 class Formulario extends StatelessWidget {
-  // final bool _validate = false;
-  
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: Text('Formulario')),
-        body: new SingleChildScrollView(
-          child: new Container(
-            margin: new EdgeInsets.all(15.0),
-            child: new Form(
-              // key: _formKey,
-              // autovalidate: _validate,
-              child: FormularioComponent(),
-            ),
+    return Scaffold(
+      appBar: AppBar(title: Text('Formulario')),
+      body: new SingleChildScrollView(
+        child: new Container(
+          margin: new EdgeInsets.all(15.0),
+          child: new Form(
+            // key: _formKey,
+            // autovalidate: _validate,
+            child: FormularioComponent(),
           ),
         ),
       ),
@@ -52,18 +49,39 @@ class _FormularioComponent extends State<FormularioComponent> {
   String descricao = '';
   String mensagem = '';
   String _previewImageUrl;
-  var longitude = '';
-  var latitude = '';
+  String longitude;
+  String latitude;
 
   Future<void> _getCurrentUserLocation() async {
     final locData = await Location().getLocation();
-    latitude = locData.latitude.toString();
-    longitude = locData.longitude.toString();
+    var _latitude = locData.latitude.toString();
+    var _longitude = locData.longitude.toString();
 
-    final staticMapImageUrl = 'https://maps.googleapis.com/maps/api/staticmap?center=$latitude,$longitude&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C$latitude,$longitude&key=?';
+    final staticMapImageUrl = 'https://maps.googleapis.com/maps/api/staticmap?center=$_latitude,$_longitude&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C$_latitude,$_longitude&key=?';
 
     setState(() {
       _previewImageUrl = staticMapImageUrl;
+      latitude =  _latitude;
+      longitude = _longitude;
+    });
+  }
+
+  Future<void> _selectOnMap() async {
+    final LatLng selectedLocation = await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (ctx) => MapScreen()
+      )
+    );
+
+    var _latitude = selectedLocation.latitude.toString();
+    var _longitude = selectedLocation.longitude.toString();
+
+    final staticMapImageUrl = 'https://maps.googleapis.com/maps/api/staticmap?center=$_latitude,$_longitude&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C$_latitude,$_longitude&key=?';
+
+    setState(() {
+      _previewImageUrl = staticMapImageUrl;
+      latitude = _latitude;
+      longitude = _longitude;
     });
   }
 
@@ -127,33 +145,38 @@ class _FormularioComponent extends State<FormularioComponent> {
                     return null;
                   }
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Text("${dataDeAniversario.toLocal()}".split(' ')[0]),
-                      SizedBox(height: 20.0,),
-                      RaisedButton(
-                        onPressed: () => _dataDeAniversario(context),
-                        child: Text('Data de Aniversario'),
-                      ),
-                    ],
-                  )
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Text("${dataDoDesaparecimento.toLocal()}".split(' ')[0]),
-                      SizedBox(height: 20.0,),
-                      RaisedButton(
-                        onPressed: () => _dataDoDesaparecimento(context),
-                        child: Text('Data do Desaparecimento'),
-                      ),
-                    ],
-                  )
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 20.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          Text("${dataDeAniversario.toLocal()}".split(' ')[0]),
+                          SizedBox(height: 20.0,),
+                          RaisedButton(
+                            onPressed: () => _dataDeAniversario(context),
+                            child: Text('Data de Aniversario'),
+                          ),
+                        ],
+                      )
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 20.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          Text("${dataDoDesaparecimento.toLocal()}".split(' ')[0]),
+                          SizedBox(height: 20.0,),
+                          RaisedButton(
+                            onPressed: () => _dataDoDesaparecimento(context),
+                            child: Text('Data Desaparecimento'),
+                          ),
+                        ],
+                      )
+                    ),
+                  ]
                 ),
                 DropdownButton(
                   value: parentesco,
@@ -194,7 +217,7 @@ class _FormularioComponent extends State<FormularioComponent> {
                 ),
                 Column(
                   children: <Widget>[
-                    SizedBox(height: 10),
+                    SizedBox(height: 10, width: 100),
                     Container(
                       child: _previewImageUrl == null ? Text('Localizacao nao informada') : 
                       Image.network(
@@ -210,9 +233,9 @@ class _FormularioComponent extends State<FormularioComponent> {
                           textColor: Theme.of(context).primaryColor,
                         ),
                          FlatButton.icon(
-                          onPressed: null,
+                          onPressed: _selectOnMap,
                           icon: Icon(Icons.map),
-                          label: Text('Localização Atual'),
+                          label: Text('Selecione no Mapa'),
                           textColor: Theme.of(context).primaryColor,
                         )
                       ],
