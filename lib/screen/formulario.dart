@@ -9,40 +9,13 @@ import 'package:location/location.dart';
 
 
 /// This Widget is the main application widget.
-class Formulario extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Formulario')),
-      body: new SingleChildScrollView(
-        child: new Container(
-          margin: new EdgeInsets.all(15.0),
-          child: new Form(
-            // key: _formKey,
-            // autovalidate: _validate,
-            child: FormularioComponent(),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class FormularioComponent extends StatefulWidget {
-
-  @override
-  _FormularioComponent createState() => _FormularioComponent();
-}
-
-
-/// This is the stateless widget that the main application instantiates.
 class _FormularioComponent extends State<FormularioComponent> {
   final _formKey = GlobalKey<FormState>();
   final bool validate = false;
 
   DateTime dataDoDesaparecimento = DateTime.now();
   DateTime dataDeAniversario = DateTime.now();
-  List parentescos = ['Pai', 'Avó', 'Mãe', 'Avô'];
+  List parentescos = ['Pai', 'Avó', 'Mãe', 'Avô', 'Tio', 'Tia', 'Filho', 'Filha'];
   int parentesco = 0;
   String nome = '';
   String nomeCompleto = '';
@@ -57,7 +30,7 @@ class _FormularioComponent extends State<FormularioComponent> {
     var _latitude = locData.latitude.toString();
     var _longitude = locData.longitude.toString();
 
-    final staticMapImageUrl = 'https://maps.googleapis.com/maps/api/staticmap?center=$_latitude,$_longitude&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C$_latitude,$_longitude&key=?';
+    final staticMapImageUrl = 'https://maps.googleapis.com/maps/api/staticmap?center=$_latitude,$_longitude&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C$_latitude,$_longitude&key=';
 
     setState(() {
       _previewImageUrl = staticMapImageUrl;
@@ -76,7 +49,7 @@ class _FormularioComponent extends State<FormularioComponent> {
     var _latitude = selectedLocation.latitude.toString();
     var _longitude = selectedLocation.longitude.toString();
 
-    final staticMapImageUrl = 'https://maps.googleapis.com/maps/api/staticmap?center=$_latitude,$_longitude&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C$_latitude,$_longitude&key=?';
+    final staticMapImageUrl = 'https://maps.googleapis.com/maps/api/staticmap?center=$_latitude,$_longitude&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C$_latitude,$_longitude&key=';
 
     setState(() {
       _previewImageUrl = staticMapImageUrl;
@@ -102,7 +75,7 @@ class _FormularioComponent extends State<FormularioComponent> {
     final DateTime picked = await showDatePicker(
           context: context,
           initialDate: dataDeAniversario,
-          firstDate: DateTime(2015, 8),
+          firstDate: DateTime(1900, 1),
           lastDate: DateTime(2101)
         );
         if (picked != null && picked != dataDeAniversario)
@@ -110,12 +83,17 @@ class _FormularioComponent extends State<FormularioComponent> {
                   dataDeAniversario = picked;
           });
    }
-      
-        @override
-        Widget build(BuildContext context) {
-          return Form(
-            key: _formKey,
-            child: Column(
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Formulario')),
+      body: Form(
+        key: _formKey,
+        child: ListView(
+          padding: const EdgeInsets.all(20.0),
+          children: <Widget>[
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 TextFormField(
@@ -133,18 +111,18 @@ class _FormularioComponent extends State<FormularioComponent> {
                     return null;
                   }
                 ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    hintText: 'Nome Completo',
-                  ),
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Please enter some text';
-                    }
-                    nomeCompleto = value;
-                    return null;
-                  }
-                ),
+                // TextFormField(
+                //   decoration: const InputDecoration(
+                //     hintText: 'Nome Completo',
+                //   ),
+                //   validator: (value) {
+                //     if (value.isEmpty) {
+                //       return 'Please enter some text';
+                //     }
+                //     nomeCompleto = value;
+                //     return null;
+                //   }
+                // ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -232,7 +210,7 @@ class _FormularioComponent extends State<FormularioComponent> {
                           label: Text('Localização Atual'),
                           textColor: Theme.of(context).primaryColor,
                         ),
-                         FlatButton.icon(
+                        FlatButton.icon(
                           onPressed: _selectOnMap,
                           icon: Icon(Icons.map),
                           label: Text('Selecione no Mapa'),
@@ -275,6 +253,15 @@ class _FormularioComponent extends State<FormularioComponent> {
                 ),
               ],
             ),
-          );
-        }
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class FormularioComponent extends StatefulWidget {
+
+  @override
+  _FormularioComponent createState() => _FormularioComponent();
 }

@@ -38,7 +38,7 @@ class Button extends StatelessWidget {
   Future<void> changeScreen(BuildContext context) async {
     await Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (ctx) => Formulario()
+        builder: (ctx) => FormularioComponent()
       )
     );
   }
@@ -49,21 +49,24 @@ class Button extends StatelessWidget {
         appBar: AppBar(
            title: Text('Missing Finder'),
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-          FlatButton(
-            child: Text('Uma pessoas esta desaparecida!'),
-            color: Colors.blue,
-            onPressed: () => changeScreen(context),
+        body: Container(
+          alignment: Alignment.center,
+          child: Column (
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              FlatButton(
+                child: Text('Uma pessoas esta desaparecida!'),
+                color: Colors.blue,
+                onPressed: () => changeScreen(context),
+              ),
+              FlatButton(
+                child: Text('Encontrei uma pessoa!'),
+                color: Colors.blue,
+                onPressed: null,
+              ),
+            ],
           ),
-          FlatButton(
-            child: Text('Encontrei uma pessoa!'),
-            color: Colors.grey,
-            onPressed: () => changeScreen(context),
-          ),
-        ]
-      ),
-    );
-  }
+        ),
+      );
+    }
 }
