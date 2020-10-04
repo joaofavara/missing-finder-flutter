@@ -13,11 +13,11 @@ class _FormularioComponentPessoaAchada extends State<FormularioComponentPessoaAc
   final _formKey = GlobalKey<FormState>();
   final bool validate = false;
 
-  DateTime dataDeAniversario = DateTime.now();
+  // DateTime dataDeAniversario = DateTime.now();
   String nome = '';
+  String idade = '';
   String nomeCompleto = '';
   String descricao = '';
-  String mensagem = '';
   String _previewImageUrl;
   String longitude;
   String latitude;
@@ -55,18 +55,18 @@ class _FormularioComponentPessoaAchada extends State<FormularioComponentPessoaAc
     });
   }
 
-  Future<void> _dataDeAniversario(BuildContext context) async {
-    final DateTime picked = await showDatePicker(
-          context: context,
-          initialDate: dataDeAniversario,
-          firstDate: DateTime(1900, 1),
-          lastDate: DateTime(2101)
-        );
-        if (picked != null && picked != dataDeAniversario)
-          setState(() {
-                  dataDeAniversario = picked;
-          });
-   }
+  // Future<void> _dataDeAniversario(BuildContext context) async {
+  //   final DateTime picked = await showDatePicker(
+  //         context: context,
+  //         initialDate: dataDeAniversario,
+  //         firstDate: DateTime(1900, 1),
+  //         lastDate: DateTime(2101)
+  //       );
+  //       if (picked != null && picked != dataDeAniversario)
+  //         setState(() {
+  //                 dataDeAniversario = picked;
+  //         });
+  //  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,6 +95,21 @@ class _FormularioComponentPessoaAchada extends State<FormularioComponentPessoaAc
                     return null;
                   }
                 ),
+                TextFormField(
+                  decoration: const InputDecoration(
+                    hintText: 'Idade',
+                  ),
+                  onSaved: (String val) {
+                    idade = val;
+                  },
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    idade = value;
+                    return null;
+                  }
+                ),
                 // TextFormField(
                 //   decoration: const InputDecoration(
                 //     hintText: 'Nome Completo',
@@ -107,25 +122,43 @@ class _FormularioComponentPessoaAchada extends State<FormularioComponentPessoaAc
                 //     return null;
                 //   }
                 // ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          Text("${dataDeAniversario.toLocal()}".split(' ')[0]),
-                          SizedBox(height: 20.0,),
-                          RaisedButton(
-                            onPressed: () => _dataDeAniversario(context),
-                            child: Text('Data de Aniversario'),
-                          ),
-                        ],
-                      )
-                    ),
-                  ]
-                ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                //   children: [
+                //     Padding(
+                //       padding: const EdgeInsets.symmetric(vertical: 20.0),
+                //       child: Column(
+                //         mainAxisSize: MainAxisSize.min,
+                //         children: <Widget>[
+                //           Text("${dataDeAniversario.toLocal()}".split(' ')[0]),
+                //           SizedBox(height: 20.0,),
+                //           RaisedButton(
+                //             onPressed: () => _dataDeAniversario(context),
+                //             child: Text('Data de Aniversario'),
+                //           ),
+                //         ],
+                //       )
+                //     ),
+                //     Container(
+                //       width: 100,
+                //       child: TextFormField(
+                //         decoration: const InputDecoration(
+                //           hintText: 'Idade',
+                //         ),
+                //         onSaved: (String val) {
+                //           idade = val;
+                //         },
+                //         validator: (value) {
+                //           if (value.isEmpty) {
+                //             return 'Please enter some text';
+                //           }
+                //           idade = value;
+                //           return null;
+                //         }
+                //       ),
+                //     )
+                //   ]
+                // ),
                 TextFormField(
                   decoration: const InputDecoration(
                     hintText: 'Descrição',
@@ -172,10 +205,10 @@ class _FormularioComponentPessoaAchada extends State<FormularioComponentPessoaAc
                       // Validate will return true if the form is valid, or false if
                       // the form is invalid.
                       if (_formKey.currentState.validate()) {
-                        const url = 'http://10.0.2.2:5000/api/people/missed';
+                        const url = 'http://10.0.2.2:5000/api/people/found';
                         var body = {
                               "nome": nome,
-                              "idade": DateFormat('yyyy-MM-dd').format(dataDeAniversario),
+                              "idade": int.parse(idade),
                               "tip": {
                                 "usuario_id": 1,
                                 "descricao": descricao,
