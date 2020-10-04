@@ -9,14 +9,11 @@ import 'package:location/location.dart';
 
 
 /// This Widget is the main application widget.
-class _FormularioComponent extends State<FormularioComponent> {
+class _FormularioComponentPessoaAchada extends State<FormularioComponentPessoaAchada> {
   final _formKey = GlobalKey<FormState>();
   final bool validate = false;
 
-  DateTime dataDoDesaparecimento = DateTime.now();
   DateTime dataDeAniversario = DateTime.now();
-  List parentescos = ['Pai', 'Avó', 'Mãe', 'Avô', 'Tio', 'Tia', 'Filho', 'Filha'];
-  int parentesco = 0;
   String nome = '';
   String nomeCompleto = '';
   String descricao = '';
@@ -56,19 +53,6 @@ class _FormularioComponent extends State<FormularioComponent> {
       latitude = _latitude;
       longitude = _longitude;
     });
-  }
-
-  Future<void> _dataDoDesaparecimento(BuildContext context) async {
-    final DateTime picked = await showDatePicker(
-          context: context,
-          initialDate: dataDoDesaparecimento,
-          firstDate: DateTime(2015, 8),
-          lastDate: DateTime(2101)
-        );
-        if (picked != null && picked != dataDoDesaparecimento)
-          setState(() {
-                  dataDoDesaparecimento = picked;
-          });
   }
 
   Future<void> _dataDeAniversario(BuildContext context) async {
@@ -140,35 +124,8 @@ class _FormularioComponent extends State<FormularioComponent> {
                         ],
                       )
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          Text("${dataDoDesaparecimento.toLocal()}".split(' ')[0]),
-                          SizedBox(height: 20.0,),
-                          RaisedButton(
-                            onPressed: () => _dataDoDesaparecimento(context),
-                            child: Text('Data Desaparecimento'),
-                          ),
-                        ],
-                      )
-                    ),
                   ]
                 ),
-                DropdownButton(
-                  value: parentesco,
-                  items: parentescos.asMap().entries.map((parentesco) {
-                      return DropdownMenuItem(
-                        child: Text(parentesco.value),
-                        value: (parentesco.key),
-                      );
-                  }).toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      parentesco = value;
-                    });
-                }),
                 TextFormField(
                   decoration: const InputDecoration(
                     hintText: 'Descrição',
@@ -178,18 +135,6 @@ class _FormularioComponent extends State<FormularioComponent> {
                       return 'Please enter some text';
                     }
                     descricao = value;
-                    return null;
-                  }
-                ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    hintText: 'Mensagem para a pessoa desaparecida',
-                  ),
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Please enter some text';
-                    }
-                    mensagem = value;
                     return null;
                   }
                 ),
@@ -230,17 +175,16 @@ class _FormularioComponent extends State<FormularioComponent> {
                         const url = 'http://10.0.2.2:5000/api/people/missed';
                         var body = {
                               "nome": nome,
-                              "nascimento": DateFormat('yyyy-MM-dd').format(dataDeAniversario),
-                              "data_desaparecimento": DateFormat('yyyy-MM-dd').format(dataDoDesaparecimento),
-                              "parentesco": parentescos[parentesco],
-                              "mensagem_de_aviso": descricao,
-                              "mensagem_para_desaparecido": mensagem,
-                              "endereco": {
-                                  "imageUrl": _previewImageUrl,
-                                  "lat": latitude,
-                                  "long": longitude
-                              },
-                              "usuario_id": 1
+                              "idade": DateFormat('yyyy-MM-dd').format(dataDeAniversario),
+                              "tip": {
+                                "usuario_id": 1,
+                                "descricao": descricao,
+                                "endereco": {
+                                    "imageUrl": _previewImageUrl,
+                                    "lat": latitude,
+                                    "long": longitude
+                                },
+                              }
                           };
                         await http.post(
                           url,
@@ -260,8 +204,8 @@ class _FormularioComponent extends State<FormularioComponent> {
   }
 }
 
-class FormularioComponent extends StatefulWidget {
+class FormularioComponentPessoaAchada extends StatefulWidget {
 
   @override
-  _FormularioComponent createState() => _FormularioComponent();
+  _FormularioComponentPessoaAchada createState() => _FormularioComponentPessoaAchada();
 }

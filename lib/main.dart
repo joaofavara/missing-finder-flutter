@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'screen/formulario.dart';
+import 'screen/formularioPessoaDesaparecida.dart';
+import 'screen/formularioPessoaAchada.dart';
+import 'screen/selecaoDoTipo.dart';
+import 'routes/app_routes.dart';
 
 void main() {
   runApp(MyApp());
@@ -7,7 +10,6 @@ void main() {
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
-
 
   @override
   Widget build(BuildContext context) {
@@ -29,44 +31,11 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Button(),
+      routes: {
+        AppRoutes.TIPO_CADASTRO: (ctx) => SelecaoDoTipo(),
+        AppRoutes.DESAPARECIDA: (ctx) => FormularioComponentPessoaDesaparecida(),
+        AppRoutes.ACHADA: (ctx) => FormularioComponentPessoaAchada(),
+      },
     );
   }
-}
-
-class Button extends StatelessWidget {
-  Future<void> changeScreen(BuildContext context) async {
-    await Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (ctx) => FormularioComponent()
-      )
-    );
-  }
-
-  @override
-  Widget build( BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-           title: Text('Missing Finder'),
-        ),
-        body: Container(
-          alignment: Alignment.center,
-          child: Column (
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              FlatButton(
-                child: Text('Uma pessoas esta desaparecida!'),
-                color: Colors.blue,
-                onPressed: () => changeScreen(context),
-              ),
-              FlatButton(
-                child: Text('Encontrei uma pessoa!'),
-                color: Colors.blue,
-                onPressed: null,
-              ),
-            ],
-          ),
-        ),
-      );
-    }
 }
