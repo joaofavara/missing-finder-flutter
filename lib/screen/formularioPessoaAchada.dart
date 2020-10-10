@@ -39,11 +39,7 @@ class _FormularioComponentPessoaAchada extends State<FormularioComponentPessoaAc
   }
 
   Future<void> _selectOnMap() async {
-    final LatLng selectedLocation = await Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (ctx) => MapScreen()
-      )
-    );
+    dynamic selectedLocation = await Navigator.of(context).pushNamed('/mapa');
 
     var _latitude = selectedLocation.latitude.toString();
     var _longitude = selectedLocation.longitude.toString();

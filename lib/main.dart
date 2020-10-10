@@ -4,6 +4,8 @@ import 'screen/formularioPessoaAchada.dart';
 import 'screen/selecaoDoTipo.dart';
 import 'routes/app_routes.dart';
 import 'package:flutter_config/flutter_config.dart';
+import 'package:app/screen/mapScreen.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,6 +42,7 @@ class MyApp extends StatelessWidget {
         AppRoutes.TIPO_CADASTRO: (ctx) => SelecaoDoTipo() ,
         AppRoutes.DESAPARECIDA: (ctx) => FormularioComponentPessoaDesaparecida(),
         AppRoutes.ACHADA: (ctx) => FormularioComponentPessoaAchada(),
+        AppRoutes.MAPA: (ctx) => MapScreen(),
       },
     );
   }
