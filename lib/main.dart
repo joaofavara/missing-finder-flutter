@@ -3,8 +3,13 @@ import 'screen/formularioPessoaDesaparecida.dart';
 import 'screen/formularioPessoaAchada.dart';
 import 'screen/selecaoDoTipo.dart';
 import 'routes/app_routes.dart';
+import 'package:flutter_config/flutter_config.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await FlutterConfig.loadEnvVariables();
+
   runApp(MyApp());
 }
 
@@ -32,7 +37,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       routes: {
-        AppRoutes.TIPO_CADASTRO: (ctx) => SelecaoDoTipo(),
+        AppRoutes.TIPO_CADASTRO: (ctx) => SelecaoDoTipo() ,
         AppRoutes.DESAPARECIDA: (ctx) => FormularioComponentPessoaDesaparecida(),
         AppRoutes.ACHADA: (ctx) => FormularioComponentPessoaAchada(),
       },

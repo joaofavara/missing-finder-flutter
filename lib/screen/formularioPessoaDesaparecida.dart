@@ -6,10 +6,13 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:location/location.dart';
+import 'package:flutter_config/flutter_config.dart';
+
 
 
 /// This Widget is the main application widget.
 class _FormularioComponentPessoaDesaparecida extends State<FormularioComponentPessoaDesaparecida> {
+  final String googleMapsKey = FlutterConfig.get('GOOGLE_MAPS');
   final _formKey = GlobalKey<FormState>();
   final bool validate = false;
 
@@ -30,7 +33,7 @@ class _FormularioComponentPessoaDesaparecida extends State<FormularioComponentPe
     var _latitude = locData.latitude.toString();
     var _longitude = locData.longitude.toString();
 
-    final staticMapImageUrl = 'https://maps.googleapis.com/maps/api/staticmap?center=$_latitude,$_longitude&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C$_latitude,$_longitude&key=';
+    final staticMapImageUrl = 'https://maps.googleapis.com/maps/api/staticmap?center=$_latitude,$_longitude&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C$_latitude,$_longitude&key=$googleMapsKey';
 
     setState(() {
       _previewImageUrl = staticMapImageUrl;
@@ -49,7 +52,7 @@ class _FormularioComponentPessoaDesaparecida extends State<FormularioComponentPe
     var _latitude = selectedLocation.latitude.toString();
     var _longitude = selectedLocation.longitude.toString();
 
-    final staticMapImageUrl = 'https://maps.googleapis.com/maps/api/staticmap?center=$_latitude,$_longitude&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C$_latitude,$_longitude&key=';
+    final staticMapImageUrl = 'https://maps.googleapis.com/maps/api/staticmap?center=$_latitude,$_longitude&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C$_latitude,$_longitude&key=$googleMapsKey';
 
     setState(() {
       _previewImageUrl = staticMapImageUrl;
