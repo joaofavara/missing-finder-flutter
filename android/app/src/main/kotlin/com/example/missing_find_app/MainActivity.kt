@@ -1,4 +1,4 @@
-package com.example.app
+package com.example.missing_find_app
 
 import io.flutter.embedding.android.FlutterActivity
 
