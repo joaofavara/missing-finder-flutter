@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'SignUp.dart';
 import 'authService.dart';
 import 'Home.dart';
+import 'Profile.dart';
 
 class Login extends StatefulWidget {
   Login({Key key, this.title}) : super(key: key);
@@ -22,7 +23,7 @@ class LoginPageState extends State<Login> {
       loginAuthService(email, password);
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => HomeActivity()),
+        MaterialPageRoute(builder: (context) => Profile()),
       );
     });
   }

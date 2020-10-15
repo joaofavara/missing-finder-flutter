@@ -21,6 +21,7 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  image_picker:
   flutter:
     sdk: flutter
   adobe_xd: ^1.0.0+1
@@ -47,9 +48,31 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/images/Katy_Perry.jpg
   #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/imagens/danstulbach.jpg
+    - assets/imagens/EmilyBlunt-similaridades.jpg
+    - assets/imagens/FernandaMontenegro.jpg
+    - assets/imagens/IsabelleDrummond-Similaridades.jpeg
+    - assets/imagens/JavierBardem-Similaridades.jpg
+    - assets/imagens/JavierBardem.jpg
+    - assets/imagens/JeffreyDeanMorgan-Similaridades.jpg
+    - assets/imagens/JudiDench.jpg
+    - assets/imagens/katyperry_similaridades.jpg
+    - assets/imagens/KatyPerry.jpg
+    - assets/imagens/KrystenRitter-Similaridades.jpg
+    - assets/imagens/LeightonMeester-Similatidades.jpg
+    - assets/imagens/MinkaKelly-Similaridades.jpg
+    - assets/imagens/MinkaKelly.jpg
+    - assets/imagens/Obama.jpg    
+    - assets/imagens/Rachel-Bilson-1.jpg
+    - assets/imagens/RachelBilson-Similaridades.jpg
+    - assets/imagens/StevenSpielberg.png
+    - assets/imagens/WillFerrell.jpg
+    - assets/imagens/ZoeyDeschanel-Similaridades.jpg
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
