@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:missing_finder/screen/AdicionarAnuncio.dart';
+import 'package:missing_finder/screen/ChecaAnuncio.dart';
+import 'package:missing_finder/screen/Home.dart';
+import 'package:missing_finder/screen/InstrucoesFoto.dart';
+import 'package:missing_finder/screen/Profile.dart';
+import 'package:missing_finder/screen/Similaridades.dart';
+import 'package:missing_finder/screen/TirarFoto.dart';
+import 'package:missing_finder/screen/mapScreen.dart';
 import 'screen/formularioPessoaDesaparecida.dart';
 import 'screen/formularioPessoaAchada.dart';
 import 'screen/selecaoDoTipo.dart';
 import 'routes/app_routes.dart';
-import 'package:flutter_config/flutter_config.dart';
-import 'package:app/screen/mapScreen.dart';
+// import 'package:flutter_config/flutter_config.dart';
+// import 'package:app/screen/mapScreen.dart';
 
 
 void main() async {
@@ -43,6 +51,13 @@ class MyApp extends StatelessWidget {
         AppRoutes.DESAPARECIDA: (ctx) => FormularioComponentPessoaDesaparecida(),
         AppRoutes.ACHADA: (ctx) => FormularioComponentPessoaAchada(),
         AppRoutes.MAPA: (ctx) => MapScreen(),
+        AppRoutes.HOME: (context) => HomePage(),
+        AppRoutes.ADICIONAR_ANUNCIO: (context) => AdicionarAnuncio(),
+        AppRoutes.PROFILE: (context) => Profile(),
+        AppRoutes.INSTRUCOES_FOTO: (context) => InstrucoesFoto(),
+        AppRoutes.TIRAR_FOTO: (context) => TirarFoto(),
+        AppRoutes.SIMILARIDADES: (context) => Similaridades(),
+        AppRoutes.CHECA_ANUNCIO: (context) => ChecaAnuncio(),
       },
     );
   }
