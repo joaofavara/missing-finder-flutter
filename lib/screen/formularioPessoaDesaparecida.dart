@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:app/screen/mapScreen.dart';
+// import 'package:app/screen/mapScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+// import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:location/location.dart';
@@ -229,23 +229,26 @@ class _FormularioComponentPessoaDesaparecida extends State<FormularioComponentPe
                       if (_formKey.currentState.validate()) {
                         const url = 'http://10.0.2.2:5000/api/people/missed';
                         var body = {
-                              "nome": nome,
-                              "nascimento": DateFormat('yyyy-MM-dd').format(dataDeAniversario),
-                              "data_desaparecimento": DateFormat('yyyy-MM-dd').format(dataDoDesaparecimento),
-                              "parentesco": parentescos[parentesco],
-                              "mensagem_de_aviso": descricao,
-                              "mensagem_para_desaparecido": mensagem,
-                              "endereco": {
-                                  "imageUrl": _previewImageUrl,
-                                  "lat": latitude,
-                                  "long": longitude
-                              },
-                              "usuario_id": 1
-                          };
-                        await http.post(
+                            "nome": nome,
+                            "nascimento": DateFormat('yyyy-MM-dd').format(dataDeAniversario),
+                            "data_desaparecimento": DateFormat('yyyy-MM-dd').format(dataDoDesaparecimento),
+                            "parentesco": parentescos[parentesco],
+                            "mensagem_de_aviso": descricao,
+                            "mensagem_para_desaparecido": mensagem,
+                            "status_desaparecido": true,
+                            "endereco": {
+                                "imageUrl": _previewImageUrl,
+                                "lat": latitude,
+                                "long": longitude
+                            },
+                            "usuario_id": 1,
+                            "input_path": "unknown/123_steve_jobs.jpg"
+                        };
+                        var teste = await http.post(
                           url,
                           body: json.encode(body)
                         );
+                        print(teste);
                       }
                     },
                     child: Text('Submit'),
