@@ -9,22 +9,24 @@ class TirarFoto extends StatefulWidget {
 
 class _TirarFotoState extends State<TirarFoto> {
   File imageFile;
+  final _picker = ImagePicker();
 
-  Future<void> goToSimilaridades(BuildContext context) async {
+  Future<void> goToSimilaridades(BuildContext context, File imagem) async {
     Navigator.of(context).pushNamed(
       '/similaridades',
+      arguments: imagem,
     );
   }
 
   Future<void> goToAbrirGaleria(BuildContext context) async {
     // ignore: deprecated_member_use
-    var imagem = await ImagePicker.pickImage(source: ImageSource.gallery);
+    PickedFile pickedFile = await _picker.getImage(source: ImageSource.gallery);
     this.setState(() {
-      imageFile = imagem;
+      imageFile = File(pickedFile.path);
     });
-    Navigator.of(context).pushNamed(
-      '/abrir_galeria',
-    );
+    // Navigator.of(context).pushNamed(
+    //   '/abrir_galeria',
+    // );
   }
 
   Future<void> goToAbrirCamera(BuildContext context) async {
@@ -78,19 +80,17 @@ class _TirarFotoState extends State<TirarFoto> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             IconButton(
-              onPressed: () =>
-                  goToAbrirGaleria(context), //_abrirGaleria(context),
-              icon:
-                  Icon(Icons.photo, color: Colors.white, size: 30),
+              onPressed: () => goToAbrirGaleria(context), //_abrirGaleria(context),
+              icon: Icon(Icons.photo, color: Colors.white, size: 30),
             ),
             IconButton(
-              onPressed: () =>
-                  goToAbrirCamera(context), //_abrirCamera(context),
-              icon: Icon(Icons.camera_alt_rounded, color: Colors.red, size: 30),
+              onPressed: () => goToAbrirCamera(context), //_abrirCamera(context),
+              icon: Icon(Icons.camera_alt, color: Colors.red, size: 30),
             ),
             IconButton(
-              onPressed: () => goToSimilaridades(context),
-              icon: Icon(Icons.arrow_forward_sharp, color: Colors.white, size: 30),
+              // onPressed: () => goToSimilaridades(context),
+              onPressed: () => goToSimilaridades(context, imageFile),
+              icon: Icon(Icons.arrow_forward, color: Colors.white, size: 30),
             ),
           ],
         ),
