@@ -29,12 +29,15 @@ class InstrucoesFoto extends StatelessWidget {
               onPressed: () => goToHome(context),
               icon: Icon(
                 Icons.home,
-                color: Colors.white, size: 30                
+                color: Colors.white, size: 30
               ),
             ),
             IconButton(
               onPressed: () => goToTirarFoto(context),
-              icon: Icon(Icons.arrow_forward_sharp, color: Colors.white, size: 30),
+              icon: Icon(
+                  Icons.arrow_forward,
+                  color: Colors.white, size: 30
+                ),
             ),
           ],
         ),
