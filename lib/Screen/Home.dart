@@ -47,58 +47,56 @@ class HomePage extends StatelessWidget {
         centerTitle: true,
       ),
 
-      // BODY => GRID COM AS FOTOS
-      // body: GridView.count(
-      //   crossAxisCount: 2, //Grid com 2 colunas
-      //   children: List.generate(10, (index) {
-      //     return Padding(
-      //       padding: const EdgeInsets.all(8.0),
-      //     //return Center(
-      //       child: new InkResponse(
-      //         child: (
-      //           Image.asset('assets/imagens/katyperry_similaridades.jpg', 
-      //           width: 500, height: 500,fit: BoxFit.cover)
-      //           //Image.network("https://robohash.org/$index")
-      //         ),
-      //         onTap: () => getAllPersons(),
-      //       ),
-                        
-      //       // LINK QUE VEM É SIMILAR A ISSO: 
-      //       //child: Image.network('https://mantovanellos-bucket.s3-sa-east-1.amazonaws.com/found/$index'),
-                       
-      //     );
-      //   }),
-      // ),
       body: FutureBuilder(
-        future: getAllPersons(), // Fetch the data
-        builder: (_, AsyncSnapshot snapshot) {
-          if (snapshot.hasData) {
-            // If your List got fetched, them show each DataNews using a ListView
-            List<dynamic> newsList = snapshot.data;
-            return ListView.builder(
-              itemCount: newsList.length,
-              itemBuilder: (_, int index) {
-                return InkWell(
-                  onTap: () => goToChecaAnuncio(context, newsList[index]),
-                  child: (
-                    Image.network(
-                      newsList[index]['url_imagem'],
-                      width: 500,
-                      height: 500,
-                      fit: BoxFit.cover
-                    )
-                  ),
+            future: getAllPersons(), // Fetch the data
+            builder: (_, AsyncSnapshot snapshot) {
+              if (snapshot.hasData) {
+                List<dynamic> newsList = snapshot.data;
+
+                return  GridView.count(
+                  crossAxisCount: 2, //Grid com 2 colunas
+                  children: List.generate(newsList.length, (index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: new InkResponse(
+                        child: Stack(
+                          children: <Widget> [
+                            Image.network(
+                              newsList[index]['url_imagem'], 
+                              width: 500,
+                              height: 500,
+                              fit: BoxFit.cover
+                            ),
+                            Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  FittedBox(
+                                  fit: BoxFit.contain,
+                                  child: Text(
+                                    '${newsList[index]['nome']}, ${newsList[index]['idade']}',
+                                    style: TextStyle(backgroundColor: Colors.grey),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ]
+                        ),
+                        onTap: () => goToChecaAnuncio(context, newsList[index]),
+                      ),
+                    );
+                  }),
                 );
-              },
-            );
-          } else {
-            // If you have no data, show a progress indicator
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        },
-      ),
+                
+              } else {
+                // If you have no data, show a progress indicator
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+            },
+        ),
 
       // BOTTOM BAR
       bottomNavigationBar: BottomAppBar(
