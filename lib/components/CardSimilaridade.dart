@@ -25,10 +25,8 @@ class CardSimilaridade extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('Similaridade: $similaridade');
-
     return InkWell(
-      onTap: () => goToChecaAnuncio(context, similaridade['id']),
+      onTap: () => goToChecaAnuncio(context, similaridade.id),
       child: Container(
         padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
         height: 200,
@@ -56,7 +54,7 @@ class CardSimilaridade extends StatelessWidget {
                               Row(
                                 children: <Widget>[
                                   Text(
-                                    'Similaridade:\n${similaridade['similarity']}%',
+                                    'Similaridade:\n${similaridade.similarity}%',
                                     style: TextStyle(
                                         color: Colors.blueGrey,
                                         fontSize: 15,
@@ -73,13 +71,13 @@ class CardSimilaridade extends StatelessWidget {
                                         children: [
                                           CircleAvatar(
                                             backgroundImage: NetworkImage(
-                                              getImage(similaridade['image'])
+                                              getImage(similaridade.image)
                                             ),
                                             radius: 65,
                                             backgroundColor: Colors.transparent,
                                           ),
                                           Text(
-                                            '${similaridade['name']}, ${similaridade['age']}',
+                                            '${similaridade.name}, ${similaridade.age}',
                                             style: TextStyle(backgroundColor: Colors.grey),
                                           )
                                         ],

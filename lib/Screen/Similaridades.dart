@@ -5,8 +5,12 @@ import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'package:path/path.dart';
 import '../components/CardSimilaridade.dart';
+import '../classes/Similaridade.dart';
 
+// ignore: must_be_immutable
 class Similaridades extends StatelessWidget {
+  Similaridade listaSimilaridade;
+
   Future<void> goToAddAnuncio(BuildContext context) async {
     Navigator.of(context).pushNamed(
       '/add_anuncio',
@@ -14,8 +18,8 @@ class Similaridades extends StatelessWidget {
   }
 
   // Future<List<Similaridade>> teste (File file) async {
-  Future<List> teste (File file) async {
-    var teste = {
+  Future<Similaridade> getSimilarityList(File file) async {
+    Map<String, dynamic> teste = {
     "input_path": "unknown/123_Steve_Jobs3.jpg",
     "result": [
         {
@@ -2016,13 +2020,9 @@ class Similaridades extends StatelessWidget {
     //   // var batata = response.stream.transform(utf8.decoder);
     //   var responseString = await response.stream.bytesToString();
     //   var test = json.decode(responseString);
-      // print("test['name']: ${test['name']['recommendations']}");
-      // final file = new File('./teste.json');
-      var rec = await teste['result'] as List;
-      List data = await rec[0]['recommendations'] as List;
-      // var data = rec['recommendations'];
+      listaSimilaridade = Similaridade.fromJson(teste);
 
-      return data;
+      return listaSimilaridade;
   }
 
   @override
@@ -2058,17 +2058,17 @@ class Similaridades extends StatelessWidget {
       ),
 
       body: FutureBuilder(
-          future: teste(file), // Fetch the data
+          future: getSimilarityList(file), // Fetch the data
           builder: (_, AsyncSnapshot snapshot) {
             if (snapshot.hasData) {
               // If your List got fetched, them show each DataNews using a ListView
-              List<dynamic> newsList = snapshot.data;
+              Similaridade newsList = snapshot.data;
               return ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
-                itemCount: newsList.length,
+                itemCount: newsList.result[0].recommendations.length,
                 itemBuilder: (_, int index) {
-                  return CardSimilaridade(newsList[index]);
+                  return CardSimilaridade(newsList.result[0].recommendations[index]);
                 },
               );
             } else {
