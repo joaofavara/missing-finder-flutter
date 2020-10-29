@@ -5,7 +5,6 @@ class Similaridade {
 	Similaridade({this.inputPath, this.result});
 
 	Similaridade.fromJson(Map<String, dynamic> json) {
-    print('json: $json');
 		inputPath = json['input_path'];
 		if (json['result'] != null) {
 			result = new List<Result>();
@@ -65,104 +64,7 @@ class Result {
 // 	}
 // }
 
-// class Landmarks {
-// 	List<List> bottomLip;
-// 	List<List> chin;
-// 	List<List> leftEye;
-// 	List<List> leftEyebrow;
-// 	List<List> noseBridge;
-// 	List<List> noseTip;
-// 	List<List> rightEye;
-// 	List<List> rightEyebrow;
-// 	List<List> topLip;
 
-// 	Landmarks({this.bottomLip, this.chin, this.leftEye, this.leftEyebrow, this.noseBridge, this.noseTip, this.rightEye, this.rightEyebrow, this.topLip});
-
-// 	Landmarks.fromJson(Map<String, dynamic> json) {
-// 		if (json['bottom_lip'] != null) {
-// 			bottomLip = new List<List>();
-// 			json['bottom_lip'].forEach((v) { bottomLip.add(new List.fromJson(v)); });
-// 		}
-// 		if (json['chin'] != null) {
-// 			chin = new List<List>();
-// 			json['chin'].forEach((v) { chin.add(new List.fromJson(v)); });
-// 		}
-// 		if (json['left_eye'] != null) {
-// 			leftEye = new List<List>();
-// 			json['left_eye'].forEach((v) { leftEye.add(new List.fromJson(v)); });
-// 		}
-// 		if (json['left_eyebrow'] != null) {
-// 			leftEyebrow = new List<List>();
-// 			json['left_eyebrow'].forEach((v) { leftEyebrow.add(new List.fromJson(v)); });
-// 		}
-// 		if (json['nose_bridge'] != null) {
-// 			noseBridge = new List<List>();
-// 			json['nose_bridge'].forEach((v) { noseBridge.add(new List.fromJson(v)); });
-// 		}
-// 		if (json['nose_tip'] != null) {
-// 			noseTip = new List<List>();
-// 			json['nose_tip'].forEach((v) { noseTip.add(new List.fromJson(v)); });
-// 		}
-// 		if (json['right_eye'] != null) {
-// 			rightEye = new List<List>();
-// 			json['right_eye'].forEach((v) { rightEye.add(new List.fromJson(v)); });
-// 		}
-// 		if (json['right_eyebrow'] != null) {
-// 			rightEyebrow = new List<List>();
-// 			json['right_eyebrow'].forEach((v) { rightEyebrow.add(new List.fromJson(v)); });
-// 		}
-// 		if (json['top_lip'] != null) {
-// 			topLip = new List<List>();
-// 			json['top_lip'].forEach((v) { topLip.add(new List.fromJson(v)); });
-// 		}
-// 	}
-
-// 	Map<String, dynamic> toJson() {
-// 		final Map<String, dynamic> data = new Map<String, dynamic>();
-// 		if (this.bottomLip != null) {
-//       data['bottom_lip'] = this.bottomLip.map((v) => v.toJson()).toList();
-//     }
-// 		if (this.chin != null) {
-//       data['chin'] = this.chin.map((v) => v.toJson()).toList();
-//     }
-// 		if (this.leftEye != null) {
-//       data['left_eye'] = this.leftEye.map((v) => v.toJson()).toList();
-//     }
-// 		if (this.leftEyebrow != null) {
-//       data['left_eyebrow'] = this.leftEyebrow.map((v) => v.toJson()).toList();
-//     }
-// 		if (this.noseBridge != null) {
-//       data['nose_bridge'] = this.noseBridge.map((v) => v.toJson()).toList();
-//     }
-// 		if (this.noseTip != null) {
-//       data['nose_tip'] = this.noseTip.map((v) => v.toJson()).toList();
-//     }
-// 		if (this.rightEye != null) {
-//       data['right_eye'] = this.rightEye.map((v) => v.toJson()).toList();
-//     }
-// 		if (this.rightEyebrow != null) {
-//       data['right_eyebrow'] = this.rightEyebrow.map((v) => v.toJson()).toList();
-//     }
-// 		if (this.topLip != null) {
-//       data['top_lip'] = this.topLip.map((v) => v.toJson()).toList();
-//     }
-// 		return data;
-// 	}
-// }
-
-// class BottomLip {
-
-
-// 	BottomLip({});
-
-// 	BottomLip.fromJson(Map<String, dynamic> json) {
-// 	}
-
-// 	Map<String, dynamic> toJson() {
-// 		final Map<String, dynamic> data = new Map<String, dynamic>();
-// 		return data;
-// 	}
-// }
 
 class Recommendations {
 	int age;
