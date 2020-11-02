@@ -11,22 +11,29 @@ class CardSimilaridade extends StatelessWidget {
     );
   }
 
-  Future<void> goToChecaAnuncio(BuildContext context, int anuncio) async {
+  Future<void> goToAnuncioPessoaDesaparecida(BuildContext context, int anuncioId) async {
     Navigator.of(context).pushNamed(
-      '/checa_anuncio',
-      arguments: anuncio
+      '/anuncio_pessoa_desaparecida',
+      arguments: anuncioId
     );
   }
 
-  
+  Future<void> goToAnuncioPessoaAchada(BuildContext context, int anuncioId) async {
+    Navigator.of(context).pushNamed(
+      '/anuncio_pessoa_achada',
+      arguments: anuncioId
+    );
+  }
+
   String getImage(String argumentos) {
     return 'https://missing-finder-bucket.s3-sa-east-1.amazonaws.com/${argumentos}';
   }
 
   @override
   Widget build(BuildContext context) {
+    print('similaridade: $similaridade');
     return InkWell(
-      onTap: () => goToChecaAnuncio(context, similaridade.id),
+      onTap: () => similaridade.type == 'DESAPARECIDA' ? goToAnuncioPessoaDesaparecida(context, similaridade.id) : goToAnuncioPessoaAchada(context, similaridade.id),
       child: Container(
         padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
         height: 200,
