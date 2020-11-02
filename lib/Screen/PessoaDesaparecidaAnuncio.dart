@@ -1,9 +1,8 @@
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:image_picker/image_picker.dart';
 import '../classes/MissedPeople.dart';
+import '../components/Informacoes.dart';
 
 // ignore: must_be_immutable
 class PessoaDesaparecida extends StatelessWidget {
@@ -30,29 +29,81 @@ class PessoaDesaparecida extends StatelessWidget {
             builder: (_, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
                 MissedPeople data = snapshot.data;
-                return Column(
-                  children: [
-                    Image.network(
-                      data.urlImagem, 
-                      width: 500,
-                      height: 350,
-                      fit: BoxFit.cover
-                    ),
-                    Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.end,
+                return Container (
+                  child: Column(
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    // crossAxisAlignment: CrossAxisAlignment.start,
+                    // crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      Image.network(
+                        data.urlImagem, 
+                        width: 400,
+                        height: 275,
+                        fit: BoxFit.cover
+                      ),
+                      Row (
+                        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        // crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          FittedBox(
-                          fit: BoxFit.contain,
-                          child: Text(
-                            'Nome: ${data.nome}',
-                            style: TextStyle(backgroundColor: Colors.grey),
-                          ),
+                          Informacoes('${data.nome}\n${data.parentesco}', 70.0,  Icon(
+                            Icons.account_circle,
+                            color: Colors.black,
+                            size: 20.0,
+                          ),),
+                          Informacoes('${data.user.telefone}\nCelularX', 70.0,  Icon(
+                            Icons.phone,
+                            color: Colors.black,
+                            size: 20.0,
+                          ),)
+                        ]
+                      ),
+                      Row (
+                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        // crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Informacoes('${data.user.email}', 70.0,  Icon(
+                            Icons.email,
+                            color: Colors.black,
+                            size: 20.0,
+                          ),),
+                          Informacoes('21/03/2020', 70.0,  Icon(
+                            Icons.calendar_today,
+                            color: Colors.black,
+                            size: 20.0,
+                          ),)
+                        ]
+                      ),
+                      Informacoes('${data.mensagemDeAviso}', 70.0,  Icon(
+                        Icons.warning,
+                        color: Colors.black,
+                        size: 20.0,
+                      ),),
+                      Informacoes('${data.mensagemParaDesaparecido}', 70.0,  Icon(
+                        Icons.message,
+                        color: Colors.black,
+                        size: 20.0,
+                      ),),
+                      Card (
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image.network(
+                              data.endereco.imageUrl, 
+                              width: 350,
+                              height: 125,
+                              fit: BoxFit.cover
+                            ),
+                            Icon(
+                              Icons.arrow_forward,
+                              color: Colors.black,
+                              size: 32.0,
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  ]
+                      )
+                    ],
+                  )
                 );
               } else {
               // If you have no data, show a progress indicator
