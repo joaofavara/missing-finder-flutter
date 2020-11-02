@@ -85,6 +85,7 @@ class Similaridades extends StatelessWidget {
                                     color: Colors.green,
                                     size: 50,
                                   ),
+                                  //onPressed: () {},
                                   SizedBox(
                                     width: 20,
                                     height: 150,

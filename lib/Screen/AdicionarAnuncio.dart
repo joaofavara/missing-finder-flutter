@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class AdicionarAnuncio extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +56,7 @@ class AdicionarAnuncio extends StatelessWidget {
               ),
               color: Colors.blue,
               textColor: Colors.white,
-              onPressed: ()  {},
+              onPressed: () {},
             ),
           ],
         ),
