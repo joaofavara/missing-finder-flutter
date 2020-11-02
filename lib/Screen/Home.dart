@@ -30,10 +30,17 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Future<void> goToChecaAnuncio(BuildContext context, Map anuncio) async {
+  Future<void> goToAnuncioPessoaDesaparecida(BuildContext context, int anuncioId) async {
     Navigator.of(context).pushNamed(
-      '/checa_anuncio',
-      arguments: anuncio
+      '/anuncio_pessoa_desaparecida',
+      arguments: anuncioId
+    );
+  }
+
+  Future<void> goToAnuncioPessoaAchada(BuildContext context, int anuncioId) async {
+    Navigator.of(context).pushNamed(
+      '/anuncio_pessoa_achada',
+      arguments: anuncioId
     );
   }
 
@@ -83,7 +90,7 @@ class HomePage extends StatelessWidget {
                             ),
                           ]
                         ),
-                        onTap: () => goToChecaAnuncio(context, newsList[index]),
+                        onTap: () => newsList[index]['tipo'] == 'DESAPARECIDA' ? goToAnuncioPessoaDesaparecida(context, newsList[index]['id']) : goToAnuncioPessoaAchada(context, newsList[index]['id']),
                       ),
                     );
                   }),

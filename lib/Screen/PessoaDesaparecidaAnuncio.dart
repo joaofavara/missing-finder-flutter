@@ -6,11 +6,10 @@ import 'package:image_picker/image_picker.dart';
 import '../classes/MissedPeople.dart';
 
 // ignore: must_be_immutable
-class ChecaAnuncio extends StatelessWidget {
+class PessoaDesaparecida extends StatelessWidget {
   MissedPeople missedPeople;
 
   Future<MissedPeople> getPerson(int id) async {
-    print('id: $id');
     var response = await http.get('http://10.0.2.2:5000/api/people/missed/$id');
     Map parsed = await jsonDecode(response.body);
     missedPeople = MissedPeople.fromJson(parsed);

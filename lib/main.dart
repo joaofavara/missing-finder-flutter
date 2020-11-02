@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:missing_finder/Screen/AdicionarAnuncio.dart';
-import 'package:missing_finder/Screen/ChecaAnuncio.dart';
+import 'package:missing_finder/Screen/PessoaDesaparecidaAnuncio.dart';
+import 'package:missing_finder/Screen/PessoaAchadaAnuncio.dart';
 import 'package:missing_finder/Screen/InstrucoesFoto.dart';
 import 'package:missing_finder/Screen/Profile.dart';
 import 'package:missing_finder/Screen/Similaridades.dart';
@@ -23,7 +24,8 @@ void main() {
       AppRoutes.INSTRUCOES_FOTO: (context) => InstrucoesFoto(),
       AppRoutes.TIRAR_FOTO: (context) => TirarFoto(),
       AppRoutes.SIMILARIDADES: (context) => Similaridades(),
-      AppRoutes.CHECA_ANUNCIO: (context) => ChecaAnuncio(),
+      AppRoutes.ANUNCIO_PESSOA_DESAPARECIDA: (context) => PessoaDesaparecida(),
+      AppRoutes.ANUNCIO_PESSOA_ACHADA: (context) => PessoaAchada(),
     },
   ));
 }
