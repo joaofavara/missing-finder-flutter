@@ -1,12 +1,26 @@
+import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:missing_find_app/Cartazes.dart';
 import 'package:missing_find_app/MyInformations.dart';
 import 'package:missing_find_app/ProfileData.dart';
+import 'package:missing_find_app/classes/User.dart';
 
 class Profile extends StatelessWidget {
+  User user;
+
+  Future<User> getPerson(int id) async {
+    var response = await http.get('http://10.0.2.2:5000/api/users/$id');
+    Map parsed = await jsonDecode(response.body);
+    user = User.fromJson(parsed);
+    return user;
+  }
+
   @override
   Widget build(BuildContext context) {
+    final userId = 1;
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Missing Finder"),
@@ -29,62 +43,76 @@ class Profile extends StatelessWidget {
           ),
         ],
       ),
-      body: Center(
-        child: IntrinsicWidth(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Text("Katy Perry"),
-              FlatButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ProfileData()),
-                  );
-                },
-                child: Text("Perfil"),
-                color: Colors.white,
-                textColor: Colors.blue,
-              ),
-              FlatButton(
-                onPressed: () {},
-                child: Text("Notificacoes"),
-                color: Colors.blue,
-                textColor: Colors.white,
-              ),
-              Divider(
-                color: Colors.white,
-              ),
-              FlatButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Cartazes()),
-                  );
-                },
-                child: Text("Meus cartazes"),
-                color: Colors.blue,
-                textColor: Colors.white,
-              ),
-              Divider(
-                color: Colors.white,
-              ),
-              FlatButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => MyInformations()),
-                  );
-                },
-                child: Text("Minhas informações"),
-                color: Colors.blue,
-                textColor: Colors.white,
-              ),
-            ],
-          ),
-        ),
-      ),
+      body: FutureBuilder<User>(
+          future: getPerson(userId), // Fetch the data
+          builder: (_, AsyncSnapshot snapshot) {
+            if (snapshot.hasData) {
+              User data = snapshot.data;
+              return Center(
+                child: IntrinsicWidth(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      Text(user.nome),
+                      FlatButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProfileData()),
+                          );
+                        },
+                        child: Text("Perfil"),
+                        color: Colors.white,
+                        textColor: Colors.blue,
+                      ),
+                      FlatButton(
+                        onPressed: () {},
+                        child: Text("Notificacoes"),
+                        color: Colors.blue,
+                        textColor: Colors.white,
+                      ),
+                      Divider(
+                        color: Colors.white,
+                      ),
+                      FlatButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Cartazes()),
+                          );
+                        },
+                        child: Text("Meus cartazes"),
+                        color: Colors.blue,
+                        textColor: Colors.white,
+                      ),
+                      Divider(
+                        color: Colors.white,
+                      ),
+                      FlatButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MyInformations()),
+                          );
+                        },
+                        child: Text("Minhas informações"),
+                        color: Colors.blue,
+                        textColor: Colors.white,
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            } else {
+              // If you have no data, show a progress indicator
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          }),
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
         color: Colors.blue,
