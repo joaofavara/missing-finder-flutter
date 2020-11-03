@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../classes/FoundPeople.dart';
-import '../components/Informacoes.dart';
+import '../components/TipPeolpleFound.dart';
 
 // ignore: must_be_immutable
 class PessoaAchada extends StatelessWidget {
@@ -41,67 +41,18 @@ class PessoaAchada extends StatelessWidget {
                         height: 275,
                         fit: BoxFit.cover
                       ),
-                      Row (
-                        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        // crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Informacoes('Teste', 70.0,  Icon(
-                            Icons.account_circle,
-                            color: Colors.black,
-                            size: 20.0,
-                          ),),
-                          Informacoes('Teste', 70.0,  Icon(
-                            Icons.phone,
-                            color: Colors.black,
-                            size: 20.0,
-                          ),)
-                        ]
-                      ),
-                      Row (
-                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        // crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Informacoes('Teste', 70.0,  Icon(
-                            Icons.email,
-                            color: Colors.black,
-                            size: 20.0,
-                          ),),
-                          Informacoes('21/03/2020', 70.0,  Icon(
-                            Icons.calendar_today,
-                            color: Colors.black,
-                            size: 20.0,
-                          ),)
-                        ]
-                      ),
-                      Informacoes('Teste', 70.0,  Icon(
-                        Icons.warning,
-                        color: Colors.black,
-                        size: 20.0,
-                      ),),
-                      Informacoes('Teste', 70.0,  Icon(
-                        Icons.message,
-                        color: Colors.black,
-                        size: 20.0,
-                      ),),
-                      Card (
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            // Image.network(
-                            //   data.endereco.imageUrl, 
-                            //   width: 350,
-                            //   height: 125,
-                            //   fit: BoxFit.cover
-                            // ),
-                            Icon(
-                              Icons.arrow_forward,
-                              color: Colors.black,
-                              size: 32.0,
-                            ),
-                          ],
+                      Container(
+                        height: 400,
+                        child: ListView.builder(
+                          physics: const AlwaysScrollableScrollPhysics(),
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          itemCount: data.tip.length,
+                          itemBuilder: (_, int index) {
+                            return TipPeolpleFound(data.tip[index]);
+                          },
                         ),
-                      )
+                      ),
                     ],
                   )
                 );
