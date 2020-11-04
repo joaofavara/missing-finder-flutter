@@ -2,16 +2,17 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:missing_find_app/Cartazes.dart';
-import 'package:missing_find_app/MyInformations.dart';
-import 'package:missing_find_app/ProfileData.dart';
+import 'package:missing_find_app/screen/Cartazes.dart';
+import 'package:missing_find_app/screen/MyInformations.dart';
+import 'package:missing_find_app/screen/ProfileData.dart';
 import 'package:missing_find_app/classes/User.dart';
 
+// ignore: must_be_immutable
 class Profile extends StatelessWidget {
   User user;
 
   Future<User> getPerson(int id) async {
-    var response = await http.get('http://127.0.0.1:5000/api/users/$id');
+    var response = await http.get('http://localhost:5000/api/users/$id');
     Map parsed = await jsonDecode(response.body);
     user = User.fromJson(parsed);
     return user;

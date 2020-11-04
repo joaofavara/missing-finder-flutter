@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'authService.dart';
+import '../authService.dart';
 import 'Profile.dart';
 
 class SignUp extends StatefulWidget {
