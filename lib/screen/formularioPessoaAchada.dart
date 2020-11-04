@@ -1,13 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:app/screen/mapScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:location/location.dart';
 import 'package:flutter_config/flutter_config.dart';
-
-
 
 /// This Widget is the main application widget.
 class _FormularioComponentPessoaAchada extends State<FormularioComponentPessoaAchada> {

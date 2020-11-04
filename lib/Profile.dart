@@ -11,7 +11,7 @@ class Profile extends StatelessWidget {
   User user;
 
   Future<User> getPerson(int id) async {
-    var response = await http.get('http://10.0.2.2:5000/api/users/$id');
+    var response = await http.get('http://127.0.0.1:5000/api/users/$id');
     Map parsed = await jsonDecode(response.body);
     user = User.fromJson(parsed);
     return user;
@@ -19,7 +19,7 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userId = 1;
+    final userId = 212;
 
     return Scaffold(
       appBar: AppBar(
@@ -54,7 +54,7 @@ class Profile extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      Text(user.nome),
+                      Text(data.nome),
                       FlatButton(
                         onPressed: () {
                           Navigator.push(
