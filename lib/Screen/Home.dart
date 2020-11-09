@@ -27,6 +27,13 @@ class HomePage extends StatelessWidget {
     );
   }
 
+    Future<void> goToChecaAnuncioAchada(BuildContext context) async {
+    Navigator.of(context).pushNamed(
+      '/checa_anuncio_achada',
+    );
+  }  
+  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +57,8 @@ class HomePage extends StatelessWidget {
                 width: 500, height: 500,fit: BoxFit.cover)
                 //Image.network("https://robohash.org/$index")
               ),
-              onTap: () => goToChecaAnuncio(context),
+              //onTap: () => goToChecaAnuncio(context),
+              onTap: () => goToChecaAnuncioAchada(context),
             ),
                         
             // LINK QUE VEM É SIMILAR A ISSO: 

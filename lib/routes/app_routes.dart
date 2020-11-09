@@ -6,4 +6,5 @@ class AppRoutes {
   static const TIRAR_FOTO = '/tirar_foto';
   static const SIMILARIDADES = '/similaridades';
   static const CHECA_ANUNCIO = '/checa_anuncio';
+  static const CHECA_ANUNCIO_ACHADA = '/checa_anuncio_achada';
 }

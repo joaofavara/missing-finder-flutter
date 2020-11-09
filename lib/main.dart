@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:missing_finder/Screen/AdicionarAnuncio.dart';
 import 'package:missing_finder/Screen/ChecaAnuncio.dart';
+import 'package:missing_finder/Screen/ChecaAnuncioAchada.dart';
 import 'package:missing_finder/Screen/InstrucoesFoto.dart';
 import 'package:missing_finder/Screen/Profile.dart';
 import 'package:missing_finder/Screen/Similaridades.dart';
@@ -24,6 +25,7 @@ void main() {
       AppRoutes.TIRAR_FOTO: (context) => TirarFoto(),
       AppRoutes.SIMILARIDADES: (context) => Similaridades(),
       AppRoutes.CHECA_ANUNCIO: (context) => ChecaAnuncio(),
+      AppRoutes.CHECA_ANUNCIO_ACHADA: (context) => ChecaAnuncioAchada(),
     },
   ));
 }
