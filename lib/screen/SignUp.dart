@@ -1,6 +1,8 @@
+import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
-
-import '../authService.dart';
+import 'package:http/http.dart';
+import '../classes/ApplicationUser.dart';
 import 'Profile.dart';
 
 class SignUp extends StatefulWidget {
@@ -21,13 +23,22 @@ class SignUpPageState extends State<SignUp> {
 
   void signUp(BuildContext context) {
     setState(() {
-      User user = User(userName.text, emailController.text, passwordController.text, number.text, fullName.text);
+      ApplicationUser user = ApplicationUser(userName.text, emailController.text, passwordController.text, number.text, fullName.text);
       signUpAuthService(user);
+    });
+  }
+
+  void signUpAuthService(ApplicationUser user) async {
+    Response r = await post('http://localhost:5000/api/users',
+        headers: {HttpHeaders.contentTypeHeader: "application/json"},
+        body: jsonEncode(user));
+
+    if(r.statusCode == HttpStatus.accepted) {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => Profile()),
       );
-    });
+    }
   }
 
   @override

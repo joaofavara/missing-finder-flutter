@@ -1,7 +1,8 @@
+import 'dart:convert';
+import 'dart:io';
+import 'package:http/http.dart';
 import 'package:flutter/material.dart';
-
 import 'SignUp.dart';
-import '../authService.dart';
 import 'Profile.dart';
 
 class Login extends StatefulWidget {
@@ -17,14 +18,22 @@ class LoginPageState extends State<Login> {
   final passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  void login(String email, String password, BuildContext context) {
-    setState(() {
-      loginAuthService(email, password);
+  void loginAuthService(String username, String password) async {
+    String basicAuth =
+        'Basic ' + base64Encode(utf8.encode('$username:$password'));
+    print(basicAuth);
+
+    Response r = await get('http://localhost:5000/api/authentication',
+        headers: <String, String>{'authorization': basicAuth});
+    print(r.statusCode);
+    print(r.body);
+
+    if(r.statusCode == HttpStatus.accepted) {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => Profile()),
       );
-    });
+    }
   }
 
   @override
@@ -84,7 +93,7 @@ class LoginPageState extends State<Login> {
               flex: 0,
               child: FlatButton(
                 onPressed: () {
-                  login(emailController.text, passwordController.text, context);
+                  loginAuthService(emailController.text, passwordController.text);
                 },
                 child: Text("Login"),
                 color: Colors.blue,
