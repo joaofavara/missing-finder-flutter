@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart';
@@ -12,7 +13,7 @@ class Similaridades extends StatelessWidget {
 
   Future<void> goToAddAnuncio(BuildContext context) async {
     Navigator.of(context).pushNamed(
-      '/add_anuncio',
+      AppRoutes.TIPO_CADASTRO
     );
   }
 

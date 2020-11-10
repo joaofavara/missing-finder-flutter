@@ -26,7 +26,7 @@ class CardSimilaridade extends StatelessWidget {
   }
 
   String getImage(String argumentos) {
-    return 'https://missing-finder-bucket.s3-sa-east-1.amazonaws.com/${argumentos}';
+    return 'https://missing-finder-bucket.s3-sa-east-1.amazonaws.com/$argumentos';
   }
 
   @override
