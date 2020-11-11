@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
-// import 'package:app/screen/mapScreen.dart';
+import '../providers/imagem.dart';
 import 'package:flutter/material.dart';
-// import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:location/location.dart';
 import 'package:flutter_config/flutter_config.dart';
+import 'package:provider/provider.dart';
 
 
 
@@ -68,6 +68,7 @@ class _FormularioComponentPessoaAchada extends State<FormularioComponentPessoaAc
 
   @override
   Widget build(BuildContext context) {
+    var imagem = Provider.of<ImageToForm>(context, listen:false).imageToForm;
     return Scaffold(
       appBar: AppBar(title: Text('Formulario')),
       body: Form(
@@ -207,7 +208,7 @@ class _FormularioComponentPessoaAchada extends State<FormularioComponentPessoaAc
                         var body = {
                               "nome": nome,
                               "idade": int.parse(idade),
-                              "input_path": "unknown/123_steve_jobs.jpg",
+                              "input_path": imagem,
                               "tip": {
                                 "usuario_id": 1,
                                 "descricao": descricao,
