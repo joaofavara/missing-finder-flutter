@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
-//import 'package:missing_finder/Screen/Profile.dart';
-//import 'package:missing_finder/routes/app_routes.dart';
+
 
 class HomePage extends StatelessWidget {
   Future<List> getAllPersons() async {

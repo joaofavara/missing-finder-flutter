@@ -7,8 +7,8 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:location/location.dart';
 import 'package:flutter_config/flutter_config.dart';
-
-
+import 'package:provider/provider.dart';
+import '../providers/imagem.dart';
 
 /// This Widget is the main application widget.
 class _FormularioComponentPessoaDesaparecida extends State<FormularioComponentPessoaDesaparecida> {
@@ -86,6 +86,7 @@ class _FormularioComponentPessoaDesaparecida extends State<FormularioComponentPe
 
   @override
   Widget build(BuildContext context) {
+    var imagem = Provider.of<ImageToForm>(context, listen:false).imageToForm;
     return Scaffold(
       appBar: AppBar(title: Text('Formulario')),
       body: Form(
@@ -242,13 +243,12 @@ class _FormularioComponentPessoaDesaparecida extends State<FormularioComponentPe
                                 "long": longitude
                             },
                             "usuario_id": 1,
-                            "input_path": "unknown/123_steve_jobs.jpg"
+                            "input_path": imagem
                         };
-                        var teste = await http.post(
+                        await http.post(
                           url,
                           body: json.encode(body)
                         );
-                        print(teste);
                       }
                     },
                     child: Text('Submit'),

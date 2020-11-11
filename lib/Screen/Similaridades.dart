@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:provider/provider.dart';
+import '../providers/imagem.dart';
 import 'package:app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -10,6 +12,7 @@ import '../classes/Similaridade.dart';
 // ignore: must_be_immutable
 class Similaridades extends StatelessWidget {
   Similaridade listaSimilaridade;
+  String pathImage;
 
   Future<void> goToAddAnuncio(BuildContext context) async {
     Navigator.of(context).pushNamed(
@@ -36,6 +39,7 @@ class Similaridades extends StatelessWidget {
       
       var data = await json.decode(responseString);
       listaSimilaridade = Similaridade.fromJson(data);
+      pathImage = listaSimilaridade.inputPath;
 
       return listaSimilaridade;
   }
@@ -43,7 +47,6 @@ class Similaridades extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final file = ModalRoute.of(context).settings.arguments;
-    print(file.toString());
     return Scaffold(
       appBar: AppBar(
         title: Text('Missing Finder'),
@@ -65,7 +68,10 @@ class Similaridades extends StatelessWidget {
               ),
               color: Colors.blue,
               textColor: Colors.white,
-              onPressed: () => goToAddAnuncio(context),
+              onPressed: () => {
+                Provider.of<ImageToForm>(context, listen:false).imageToForm = pathImage,
+                goToAddAnuncio(context)
+              },
             ),
           ],
         ),
