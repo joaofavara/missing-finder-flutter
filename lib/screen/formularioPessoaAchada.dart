@@ -24,6 +24,33 @@ class _FormularioComponentPessoaAchada extends State<FormularioComponentPessoaAc
   String longitude;
   String latitude;
 
+    Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: true, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Anuncio criado com sucesso!'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Poderá ver seu anuncios dentro do seu perfil.'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Confirmação'),
+              onPressed: () {
+                Navigator.of(context).popUntil((r) => r.isFirst);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   Future<void> _getCurrentUserLocation() async {
     final locData = await Location().getLocation();
     var _latitude = locData.latitude.toString();
@@ -219,10 +246,14 @@ class _FormularioComponentPessoaAchada extends State<FormularioComponentPessoaAc
                                 },
                               }
                           };
-                        await http.post(
+                        var response = await http.post(
                           url,
                           body: json.encode(body)
                         );
+
+                        if(response.statusCode == 200) {
+                          _showMyDialog();
+                        }
                       }
                     },
                     child: Text('Submit'),
