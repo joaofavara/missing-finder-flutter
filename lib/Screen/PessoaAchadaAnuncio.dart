@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:app/components/ImagemAnuncio.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../classes/FoundPeople.dart';
@@ -31,18 +32,14 @@ class PessoaAchada extends StatelessWidget {
                 FoundPeople data = snapshot.data;
                  return Container (
                   child: Column(
-                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    // crossAxisAlignment: CrossAxisAlignment.start,
-                    // crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      Image.network(
-                        data.urlImagem, 
-                        width: 400,
-                        height: 275,
-                        fit: BoxFit.cover
+                      ImagemAnuncio(
+                        data.urlImagem,
+                        data.nome,
+                        data.idade
                       ),
                       Container(
-                        height: 400,
+                        height: 300,
                         child: ListView.builder(
                           physics: const AlwaysScrollableScrollPhysics(),
                           scrollDirection: Axis.vertical,

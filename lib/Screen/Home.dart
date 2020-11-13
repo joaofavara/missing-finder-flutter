@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
+import '../components/InformacoesNomeIdade.dart';
 
 
 class HomePage extends StatelessWidget {
   Future<List> getAllPersons() async {
-    var response = await http.get('http://10.0.2.2:5000/api/people/missed');
+    var response = await http.get('http://10.0.2.2:5000/api/people/found');
     List  data = convert.jsonDecode(response.body);
     List items = data.toList();
     return items;
@@ -75,16 +76,34 @@ class HomePage extends StatelessWidget {
                             ),
                             Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  FittedBox(
-                                  fit: BoxFit.contain,
-                                  child: Text(
-                                    '${newsList[index]['nome']}, ${newsList[index]['idade']}',
-                                    style: TextStyle(backgroundColor: Colors.grey),
+                                  Container (
+                                    height: 35,
+                                    // width: 20,
+                                    child: Card(
+                                      color: Colors.grey[350].withOpacity(0.6),
+                                      child: Row (
+                                        // crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          // Container(
+                                          //   margin: const EdgeInsets.all(20.0),
+                                          // ),
+                                          Text(
+                                            '${newsList[index]['nome']}, ${newsList[index]['idade']}',
+                                            style: TextStyle(
+                                              fontFamily: 'Arial',
+                                              fontSize: 15.0,
+                                              fontWeight: FontWeight.w600
+                                            )
+                                            // style: TextStyle(height: 2, fontSize: 1),
+                                          ),
+                                        ],
+                                      )
+                                    ),
                                   ),
-                                ),
+                                // ),
                               ],
                             ),
                           ]

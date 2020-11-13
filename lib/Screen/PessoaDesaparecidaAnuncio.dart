@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:app/components/ImagemAnuncio.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../classes/MissedPeople.dart';
@@ -35,11 +36,10 @@ class PessoaDesaparecida extends StatelessWidget {
                     // crossAxisAlignment: CrossAxisAlignment.start,
                     // crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      Image.network(
-                        data.urlImagem, 
-                        width: 400,
-                        height: 275,
-                        fit: BoxFit.cover
+                     ImagemAnuncio(
+                        data.urlImagem,
+                        data.nome,
+                        data.idade
                       ),
                       Row (
                         // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -50,7 +50,7 @@ class PessoaDesaparecida extends StatelessWidget {
                             color: Colors.black,
                             size: 20.0,
                           ),),
-                          Informacoes('${data.user.telefone}\nCelularX', 70.0,  Icon(
+                          Informacoes('${data.user.telefone}\nCelular', 70.0,  Icon(
                             Icons.phone,
                             color: Colors.black,
                             size: 20.0,
