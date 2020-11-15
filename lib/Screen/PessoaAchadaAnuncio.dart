@@ -44,9 +44,9 @@ class PessoaAchada extends StatelessWidget {
                           physics: const AlwaysScrollableScrollPhysics(),
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
-                          itemCount: data.tip.length,
+                          // itemCount: data.dica.length,
                           itemBuilder: (_, int index) {
-                            return TipPeolpleFound(data.tip[index]);
+                            return TipPeolpleFound(data.dica);
                           },
                         ),
                       ),

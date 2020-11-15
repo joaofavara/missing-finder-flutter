@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
-import '../components/InformacoesNomeIdade.dart';
+// import '../components/InformacoesNomeIdade.dart';
 
 
 class HomePage extends StatelessWidget {
@@ -74,38 +74,38 @@ class HomePage extends StatelessWidget {
                               height: 500,
                               fit: BoxFit.cover
                             ),
-                            Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Container (
-                                    height: 35,
-                                    // width: 20,
-                                    child: Card(
-                                      color: Colors.grey[350].withOpacity(0.6),
-                                      child: Row (
-                                        // crossAxisAlignment: CrossAxisAlignment.start,
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          // Container(
-                                          //   margin: const EdgeInsets.all(20.0),
-                                          // ),
-                                          Text(
-                                            '${newsList[index]['nome']}, ${newsList[index]['idade']}',
-                                            style: TextStyle(
-                                              fontFamily: 'Arial',
-                                              fontSize: 15.0,
-                                              fontWeight: FontWeight.w600
-                                            )
-                                            // style: TextStyle(height: 2, fontSize: 1),
-                                          ),
-                                        ],
-                                      )
-                                    ),
-                                  ),
-                                // ),
-                              ],
-                            ),
+                            // Column(
+                            //     crossAxisAlignment: CrossAxisAlignment.center,
+                            //     mainAxisAlignment: MainAxisAlignment.end,
+                            //     children: [
+                            //       Container (
+                            //         height: 35,
+                            //         // width: 20,
+                            //         child: Card(
+                            //           color: Colors.grey[350].withOpacity(0.6),
+                            //           child: Row (
+                            //             // crossAxisAlignment: CrossAxisAlignment.start,
+                            //             mainAxisAlignment: MainAxisAlignment.center,
+                            //             children: [
+                            //               // Container(
+                            //               //   margin: const EdgeInsets.all(20.0),
+                            //               // ),
+                            //               Text(
+                            //                 '${newsList[index]['nome']}, ${newsList[index]['idade']}',
+                            //                 style: TextStyle(
+                            //                   fontFamily: 'Arial',
+                            //                   fontSize: 15.0,
+                            //                   fontWeight: FontWeight.w600
+                            //                 )
+                            //                 // style: TextStyle(height: 2, fontSize: 1),
+                            //               ),
+                            //             ],
+                            //           )
+                            //         ),
+                            //       ),
+                            //     // ),
+                            //   ],
+                            // ),
                           ]
                         ),
                         onTap: () => newsList[index]['tipo'] == 'DESAPARECIDA' ? goToAnuncioPessoaDesaparecida(context, newsList[index]['id']) : goToAnuncioPessoaAchada(context, newsList[index]['id']),

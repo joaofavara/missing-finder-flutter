@@ -1,37 +1,38 @@
-import './Endereco.dart';
+import 'Dica.dart';
 
 class FoundPeople {
   bool ativo;
+  String dataCriacao;
+  Null dataDesativacao;
+  Dica dica;
   List<double> encoding;
   int id;
   int idade;
   String nome;
-  List<Tip> tip;
   String tipo;
   String urlImagem;
 
   FoundPeople(
       {this.ativo,
+      this.dataCriacao,
+      this.dataDesativacao,
+      this.dica,
       this.encoding,
       this.id,
       this.idade,
       this.nome,
-      this.tip,
       this.tipo,
       this.urlImagem});
 
   FoundPeople.fromJson(Map<String, dynamic> json) {
     ativo = json['ativo'];
+    dataCriacao = json['data_criacao'];
+    dataDesativacao = json['data_desativacao'];
+    dica = json['dica'] != null ? new Dica.fromJson(json['dica']) : null;
     encoding = json['encoding'].cast<double>();
     id = json['id'];
     idade = json['idade'];
     nome = json['nome'];
-    if (json['tip'] != null) {
-      tip = new List<Tip>();
-      json['tip'].forEach((v) {
-        tip.add(new Tip.fromJson(v));
-      });
-    }
     tipo = json['tipo'];
     urlImagem = json['url_imagem'];
   }
@@ -39,41 +40,33 @@ class FoundPeople {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['ativo'] = this.ativo;
+    data['data_criacao'] = this.dataCriacao;
+    data['data_desativacao'] = this.dataDesativacao;
+    if (this.dica != null) {
+      data['dica'] = this.dica.toJson();
+    }
     data['encoding'] = this.encoding;
     data['id'] = this.id;
     data['idade'] = this.idade;
     data['nome'] = this.nome;
-    if (this.tip != null) {
-      data['tip'] = this.tip.map((v) => v.toJson()).toList();
-    }
     data['tipo'] = this.tipo;
     data['url_imagem'] = this.urlImagem;
     return data;
   }
 }
 
-class Tip {
-  String descricao;
-  Endereco endereco;
-  int usuarioId;
+class Endereco {
+  String imageUrl;
 
-  Tip({this.descricao, this.endereco, this.usuarioId});
+  Endereco({this.imageUrl});
 
-  Tip.fromJson(Map<String, dynamic> json) {
-    descricao = json['descricao'];
-    endereco = json['endereco'] != null
-        ? new Endereco.fromJson(json['endereco'])
-        : null;
-    usuarioId = json['usuario_id'];
+  Endereco.fromJson(Map<String, dynamic> json) {
+    imageUrl = json['imageUrl'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['descricao'] = this.descricao;
-    if (this.endereco != null) {
-      data['endereco'] = this.endereco.toJson();
-    }
-    data['usuario_id'] = this.usuarioId;
+    data['imageUrl'] = this.imageUrl;
     return data;
   }
 }

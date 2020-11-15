@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'InformationsFound.dart';
+import '../classes/Dica.dart';
 
 // ignore: must_be_immutable
 class TipPeolpleFound extends StatelessWidget {
   TipPeolpleFound(this.data); /* Esse é o creator que vai receber os dados */
-  var data;
+  Dica data;
 
   @override
   Widget build(BuildContext context) {
+  print('data: $data');
     return Card(
       color: Colors.blue,
       child: Column(
@@ -17,7 +19,7 @@ class TipPeolpleFound extends StatelessWidget {
               Container(
                 width: MediaQuery.of(context).size.width * 0.45,
                 child: InformationsFound(
-                  'Data',
+                  '${data.dataCriacao}',
                   50,
                   Icon(
                       Icons.calendar_today,
@@ -29,7 +31,7 @@ class TipPeolpleFound extends StatelessWidget {
               Container(
                 width: MediaQuery.of(context).size.width * 0.45,
                 child: InformationsFound(
-                  'User',
+                  '${data.user.nome}',
                   50,
                   Icon(
                       Icons.account_circle,
@@ -45,7 +47,7 @@ class TipPeolpleFound extends StatelessWidget {
               Container(
                 width: MediaQuery.of(context).size.width * 0.45,
                 child: InformationsFound(
-                  'Telefone',
+                  '${data.user.telefone}',
                   50,
                   Icon(
                       Icons.phone,
@@ -57,7 +59,7 @@ class TipPeolpleFound extends StatelessWidget {
               Container(
                 width: MediaQuery.of(context).size.width * 0.45,
                 child: InformationsFound(
-                  'Email',
+                  '${data.user.email}',
                   50,
                   Icon(
                       Icons.email,
@@ -69,7 +71,7 @@ class TipPeolpleFound extends StatelessWidget {
             ]
           ),
           InformationsFound(
-            data.descricao,
+            data.mensagemDeAviso,
             50,
             Icon(
                 Icons.warning,
