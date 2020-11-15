@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 //import 'package:missing_finder/Screen/Profile.dart';
 //import 'package:missing_finder/routes/app_routes.dart';
 
+
 class HomePage extends StatelessWidget {
-   Future<void> goToHome(BuildContext context) async {
+  Future<void> goToHome(BuildContext context) async {
     Navigator.of(context).popAndPushNamed(
       '/home',
     );
@@ -21,18 +22,17 @@ class HomePage extends StatelessWidget {
     );
   }
 
-    Future<void> goToChecaAnuncio(BuildContext context) async {
+  Future<void> goToChecaAnuncio(BuildContext context) async {
     Navigator.of(context).pushNamed(
       '/checa_anuncio',
     );
   }
 
-    Future<void> goToChecaAnuncioAchada(BuildContext context) async {
+  Future<void> goToChecaAnuncioAchada(BuildContext context) async {
     Navigator.of(context).pushNamed(
       '/checa_anuncio_achada',
     );
-  }  
-  
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,20 +50,23 @@ class HomePage extends StatelessWidget {
         children: List.generate(10, (index) {
           return Padding(
             padding: const EdgeInsets.all(8.0),
-          //return Center(
+            //return Center(
             child: new InkResponse(
               child: (
-                Image.asset('assets/imagens/katyperry_similaridades.jpg', 
-                width: 500, height: 500,fit: BoxFit.cover)
-                //Image.network("https://robohash.org/$index")
-              ),
+                      //Image.asset('assets/imagens/katyperry_similaridades.jpg',
+                      Image.network(
+                          'https://uploaddeimagens.com.br/images/002/944/226/full/KatyPerry.jpg',
+                          width: 500,
+                          height: 500,
+                          fit: BoxFit.cover)
+                  //Image.network("https://robohash.org/$index")
+                  ),
               //onTap: () => goToChecaAnuncio(context),
               onTap: () => goToChecaAnuncioAchada(context),
             ),
-                        
-            // LINK QUE VEM É SIMILAR A ISSO: 
+
+            // LINK QUE VEM É SIMILAR A ISSO:
             //child: Image.network('https://mantovanellos-bucket.s3-sa-east-1.amazonaws.com/found/$index'),
-                       
           );
         }),
       ),
@@ -76,7 +79,7 @@ class HomePage extends StatelessWidget {
           children: <Widget>[
             IconButton(
               onPressed: () {}, //=> goToHome(context),
-              icon: Icon(Icons.home, color: Colors.white, size: 30),
+              icon: Icon(Icons.home, color: Colors.blue, size: 10),
             ),
             IconButton(
               onPressed: () => goToInstrucoesFoto(context),

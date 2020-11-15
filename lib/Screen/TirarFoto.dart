@@ -88,9 +88,11 @@ class _TirarFotoState extends State<TirarFoto> {
                   goToAbrirCamera(context), //_abrirCamera(context),
               icon: Icon(Icons.camera_alt_rounded, color: Colors.red, size: 30),
             ),
+            
+            // BOTÃO APENAS PARA AJUDAR NO DESENVOLVIMENTO 
             IconButton(
               onPressed: () => goToSimilaridades(context),
-              icon: Icon(Icons.arrow_forward_sharp, color: Colors.white, size: 30),
+              icon: Icon(Icons.arrow_forward_sharp, color: Colors.blue, size: 5),
             ),
           ],
         ),

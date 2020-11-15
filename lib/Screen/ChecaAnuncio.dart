@@ -28,6 +28,7 @@ class ChecaAnuncio extends StatelessWidget {
                 child: Column(children: <Widget>[
                   Image.network(
                       "https://uploaddeimagens.com.br/images/002/944/226/full/KatyPerry.jpg",
+                      
                       height: 300,
                       fit: BoxFit.fitWidth),
                   Text(

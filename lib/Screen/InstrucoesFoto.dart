@@ -26,10 +26,10 @@ class InstrucoesFoto extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             IconButton(
-              onPressed: () => goToHome(context),
+              onPressed: () {},
               icon: Icon(
                 Icons.home,
-                color: Colors.white, size: 30                
+                color: Colors.blue, size: 10
               ),
             ),
             IconButton(
