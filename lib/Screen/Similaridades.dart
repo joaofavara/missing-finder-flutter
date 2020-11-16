@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'AlertDialog.dart';
 
 class Similaridades extends StatelessWidget {
   Future<void> goToAddAnuncio(BuildContext context) async {
@@ -35,77 +36,83 @@ class Similaridades extends StatelessWidget {
           ],
         ),
       ),
-      body: _body(),
-    );
-  }
 
-  _body() {
-    return SingleChildScrollView(
-      child: Container(
+      // BODY
+      body: Container(
         padding: EdgeInsets.all(5),
         //padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
         width: double.maxFinite,
         child: Column(children: <Widget>[
           Card(
-            elevation: 5,            
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(width: 2.0, color: Colors.blue),
-                ),
-                color: Colors.white,
-              ),
-              padding: EdgeInsets.all(10),
-              child: Row(
-                //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Column(
-                    children: [
-                      Text(
-                        "SIMILARIDADE",
-                        style: TextStyle(fontSize: 15, color: Colors.blue,fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        "90%",
-                        style: TextStyle(fontSize: 50, color: Colors.blue,fontWeight: FontWeight.bold),
-                      ),
-                    ],
+            elevation: 5,
+            child: new InkWell(
+              onTap: () {
+                //print("clicado");
+                showAlertDialog1(context);
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border(
+                    top: BorderSide(width: 2.0, color: Colors.blue),
                   ),
-                  Spacer(),
-                  Spacer(),
-                  Column(
-                    children: [
-                      CircleAvatar(
+                  color: Colors.white,
+                ),
+                padding: EdgeInsets.all(10),
+                child: Row(
+                  //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Column(
+                      children: [
+                        Text(
+                          "SIMILARIDADE",
+                          style: TextStyle(
+                              fontSize: 15,
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          "90%",
+                          style: TextStyle(
+                              fontSize: 50,
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    Spacer(),
+                    Spacer(),
+                    Column(
+                      children: [
+                        CircleAvatar(
 //                        backgroundImage: AssetImage(
 //                          'assets/imagens/katyperry_similaridades.jpg'),
-                          backgroundImage: NetworkImage( 
-                            'https://uploaddeimagens.com.br/images/002/944/226/full/KatyPerry.jpg'),
-                            radius: 75,
-                            backgroundColor: Colors.transparent,
-                      ),
-                      Container(
-                        child: Text(
-                          'KATHERINE',
-                          style: TextStyle(
-                            fontSize:20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blue,
+                          backgroundImage: NetworkImage(
+                              'https://uploaddeimagens.com.br/images/002/944/226/full/KatyPerry.jpg'),
+                          radius: 75,
+                          backgroundColor: Colors.transparent,
+                        ),
+                        Container(
+                          child: Text(
+                            'KATHERINE',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.blue,
+                            ),
                           ),
                         ),
-                      ), 
-                    ],
-                  ),
-                  Spacer(),
-                  Spacer(),
-                  Column(
-                    children: [
-                      Icon(Icons.check, color: Colors.green, size: 60),
-                      //onPressed: () {}
-                    ],
-                  ),
-                  Spacer(),
-                  
-                ],
+                      ],
+                    ),
+                    Spacer(),
+                    Spacer(),
+                    Column(
+                      children: [
+                        Icon(Icons.check, color: Colors.green, size: 60),
+                      ],
+                    ),
+                    Spacer(),
+                  ],
+                ),
               ),
             ),
           ),

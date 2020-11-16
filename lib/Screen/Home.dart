@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 //import 'package:missing_finder/Screen/Profile.dart';
 //import 'package:missing_finder/routes/app_routes.dart';
 
-
 class HomePage extends StatelessWidget {
   Future<void> goToHome(BuildContext context) async {
     Navigator.of(context).popAndPushNamed(
