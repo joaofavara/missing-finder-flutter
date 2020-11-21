@@ -38,18 +38,19 @@ class PessoaAchada extends StatelessWidget {
                         data.nome,
                         data.idade
                       ),
-                      Container(
-                        height: 300,
-                        child: ListView.builder(
-                          physics: const AlwaysScrollableScrollPhysics(),
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          // itemCount: data.dica.length,
-                          itemBuilder: (_, int index) {
-                            return TipPeolpleFound(data.dica);
-                          },
-                        ),
-                      ),
+                      // Container(
+                      //   height: 300,
+                      //   child: ListView.builder(
+                      //     physics: const AlwaysScrollableScrollPhysics(),
+                      //     scrollDirection: Axis.vertical,
+                      //     shrinkWrap: true,
+                      //     // itemCount: data.dica.length,
+                      //     itemBuilder: (_, int index) {
+                      //       return TipPeolpleFound(data.dica);
+                      //     },
+                      //   ),
+                      // ),
+                      TipPeolpleFound(data.dica)
                     ],
                   )
                 );

@@ -19,7 +19,8 @@ class TipPeolpleFound extends StatelessWidget {
               Container(
                 width: MediaQuery.of(context).size.width * 0.45,
                 child: InformationsFound(
-                  '${data.dataCriacao}',
+                  // '${data.dataCriacao}',
+                  '17/11/2020',
                   50,
                   Icon(
                       Icons.calendar_today,

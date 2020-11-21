@@ -19,7 +19,7 @@ class _FormularioComponentPessoaAchada extends State<FormularioComponentPessoaAc
   String nome = '';
   String idade = '';
   String nomeCompleto = '';
-  String descricao = '';
+  String mensagemDeAviso = '';
   String _previewImageUrl;
   String longitude;
   String latitude;
@@ -193,7 +193,7 @@ class _FormularioComponentPessoaAchada extends State<FormularioComponentPessoaAc
                     if (value.isEmpty) {
                       return 'Please enter some text';
                     }
-                    descricao = value;
+                    mensagemDeAviso = value;
                     return null;
                   }
                 ),
@@ -236,13 +236,13 @@ class _FormularioComponentPessoaAchada extends State<FormularioComponentPessoaAc
                               "nome": nome,
                               "idade": int.parse(idade),
                               "input_path": imagem,
-                              "tip": {
+                              "dica": {
                                 "usuario_id": 1,
-                                "descricao": descricao,
+                                "mensagem_de_aviso": mensagemDeAviso,
+                                "lat": latitude,
+                                "long": longitude,
                                 "endereco": {
                                     "imageUrl": _previewImageUrl,
-                                    "lat": latitude,
-                                    "long": longitude
                                 },
                               }
                           };
