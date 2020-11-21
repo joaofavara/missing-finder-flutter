@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         routes: {
-          AppRoutes.HOME: (context) => HomePage(),
+          AppRoutes.HOME: (context) => MainPage(),
           AppRoutes.TIPO_CADASTRO: (ctx) => SelecaoDoTipo() ,
           AppRoutes.DESAPARECIDA: (ctx) => FormularioComponentPessoaDesaparecida(),
           AppRoutes.ACHADA: (ctx) => FormularioComponentPessoaAchada(),
