@@ -69,28 +69,30 @@ class CardSimilaridade extends StatelessWidget {
                                       ),
                                   ),
                                   Spacer(),
-                                  Stack (
-                                    children: [
-                                      Column(
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment: MainAxisAlignment.end,
-                                        children: [
-                                          CircleAvatar(
-                                            backgroundImage: NetworkImage(
-                                              getImage(similaridade.image)
-                                            ),
-                                            radius: 65,
-                                            backgroundColor: Colors.transparent,
+                                       Center(
+                                        child: Stack (
+                                          alignment: Alignment.center,
+                                          children: <Widget>[
+                                            Image.network(
+                                                getImage(similaridade.image),
+                                                width: 160.0,
+                                                height: 160.0,
+                                                //fit: BoxFit.contain,
+                                              ),
+                                            Positioned(
+                                              top: 140.0,
+                                              child: Container(
+                                                // height: 100.0,
+                                                child: Text(
+                                                  '${similaridade.name}, ${similaridade.age}',
+                                                  overflow: TextOverflow.clip,
+                                                  style: TextStyle(backgroundColor: Colors.grey),
+                                                ),
+                                              )
+                                            )
+                                          ],
+                                        ),
                                           ),
-                                          Text(
-                                            '${similaridade.name}, ${similaridade.age}',
-                                            style: TextStyle(backgroundColor: Colors.grey),
-                                          )
-                                        ],
-                                      )
-                                    ],
-                                  ),
                                   Spacer(),
                                   Icon(
                                     Icons.check,
