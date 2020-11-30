@@ -36,11 +36,18 @@ class PessoaDesaparecida extends StatelessWidget {
                     // crossAxisAlignment: CrossAxisAlignment.start,
                     // crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                     ImagemAnuncio(
+                      Row (
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget> [
+                          Expanded (
+                            child: ImagemAnuncio(
                         data.urlImagem,
                         data.nome,
                         data.idade
                       ),
+                          ),
+                        ]
+                      ), 
                       Row (
                         // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         // crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,17 +94,23 @@ class PessoaDesaparecida extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Image.network(
+                          children: <Widget>[
+                            Expanded(
+                              child: Image.network(
                               data.endereco.imageUrl, 
                               width: 350,
                               height: 125,
                               fit: BoxFit.cover
                             ),
-                            Icon(
+                              flex: 4,
+                            ),
+                            Expanded(
+                              child: Icon(
                               Icons.arrow_forward,
                               color: Colors.black,
                               size: 32.0,
+                            ),
+                              flex: 1,
                             ),
                           ],
                         ),

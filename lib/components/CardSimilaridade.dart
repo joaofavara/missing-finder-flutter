@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 // ignore: must_be_immutable
 class CardSimilaridade extends StatelessWidget {
@@ -29,13 +32,98 @@ class CardSimilaridade extends StatelessWidget {
     return 'https://missing-finder-bucket.s3-sa-east-1.amazonaws.com/$argumentos';
   }
 
+  showAlertDialog(BuildContext context) {
+    Widget okButton = FlatButton(
+      child: Text("OK"),
+      onPressed: () {
+        Navigator.of(context).popUntil((r) => r.isFirst);
+      },
+    );
+
+    AlertDialog alert = AlertDialog(
+      title: Text("Notificação"),
+      content: Text("Enviamos uma mensagem para o responsável pelo anúncio."),
+      actions: [
+        okButton,
+      ],
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+  showConfirmationDialog(
+      BuildContext context, int anuncioId, String nome, String tipo) {
+    // set up the buttons
+    Widget cancelButton = FlatButton(
+      child: Text(
+        "NÃO",
+        style: TextStyle(color: Colors.blueGrey, fontWeight: FontWeight.normal),
+      ),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+
+    Widget continueButton = FlatButton(
+      child: Text(
+        "SIM",
+        style: TextStyle(fontWeight: FontWeight.bold),
+      ),
+      onPressed: () async {
+        const url = 'http://10.0.2.2:5000/api/notifications/detected-person';
+        var body = {"posterId": anuncioId, "type": tipo, "userId": 1};
+        print(json.encode(body));
+        var response = await http.post(url, body: json.encode(body));
+
+        print(response);
+
+        showAlertDialog(context);
+      }
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Confirmação"),
+      content: RichText(
+        text: new TextSpan(
+          style: new TextStyle(
+            fontSize: 14.0,
+            color: Colors.black,
+          ),
+          children: <TextSpan>[
+            new TextSpan(text: "Está certo de que"),
+            new TextSpan(
+                text: " $nome ",
+                style: new TextStyle(fontWeight: FontWeight.bold)),
+            new TextSpan(text: "é a pessoa que você encontrou?"),
+          ],
+        ),
+      ),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     print('similaridade: $similaridade');
-    return InkWell(
-      onTap: () => similaridade.type == 'DESAPARECIDA' ? goToAnuncioPessoaDesaparecida(context, similaridade.id) : goToAnuncioPessoaAchada(context, similaridade.id),
-      child: Container(
-        padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+    print(similaridade.image);
+    return Container(
         height: 200,
         width: double.maxFinite,
         child: Card(
@@ -47,74 +135,103 @@ class CardSimilaridade extends StatelessWidget {
               ),
               color: Colors.white,
             ),
+          child: Row(
+            children: <Widget>[
+              Expanded(
             child: Padding(
-              padding: EdgeInsets.all(7),
-              child: Stack(children: <Widget>[
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Stack(
-                    children: <Widget>[
-                      Padding(
-                          padding: const EdgeInsets.only(left: 10, top: 5),
+                    padding: EdgeInsets.all(16.0),
                           child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
+                          Row(children: <Widget>[
+                            Text(
+                              'SIMILARIDADE:',
+                              style: TextStyle(
+                                  color: Colors.blueGrey,
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ]),
                               Row(
-                                children: <Widget>[
+                            children: [
                                   Text(
-                                    'Similaridade:\n${similaridade.similarity}%',
+                                '${similaridade.similarity}%',
                                     style: TextStyle(
                                         color: Colors.blueGrey,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ])),
+                flex: 2,
+              ),
+              Expanded(
+                child: InkWell(
+                  onTap: () => similaridade.type == 'DESAPARECIDA'
+                      ? goToAnuncioPessoaDesaparecida(context, similaridade.id)
+                      : goToAnuncioPessoaAchada(context, similaridade.id),
+                  child: Stack(children: <Widget>[
+                    Container(
+                      decoration: new BoxDecoration(
+                        shape: BoxShape.rectangle,
+                        image: new DecorationImage(
+                            fit: BoxFit.fill,
+                            image:
+                                new NetworkImage(getImage(similaridade.image))),
                                       ),
                                   ),
-                                  Spacer(),
-                                       Center(
-                                        child: Stack (
-                                          alignment: Alignment.center,
-                                          children: <Widget>[
-                                            Image.network(
-                                                getImage(similaridade.image),
-                                                width: 160.0,
-                                                height: 160.0,
-                                                //fit: BoxFit.contain,
+                    Column(
+                      children: [
+                        Expanded(
+                          child: Container(),
+                          flex: 4,
                                               ),
-                                            Positioned(
-                                              top: 140.0,
+                        Expanded(
                                               child: Container(
-                                                // height: 100.0,
+                            alignment: Alignment.center,
+                            color: Colors.black.withAlpha(180),
                                                 child: Text(
                                                   '${similaridade.name}, ${similaridade.age}',
                                                   overflow: TextOverflow.clip,
-                                                  style: TextStyle(backgroundColor: Colors.grey),
+                              style: TextStyle(
+                                color: Colors.white.withAlpha(200),
+                              ),
+                            ),
                                                 ),
-                                              )
+                          flex: 1,
                                             )
                                           ],
                                         ),
+                  ]),
+                ),
+                flex: 3,
                                           ),
-                                  Spacer(),
-                                  Icon(
+              Expanded(
+                child: InkWell(
+                  onTap: () => showConfirmationDialog(context, similaridade.id,
+                      similaridade.name, similaridade.type),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Expanded(
+                        child: Icon(
                                     Icons.check,
                                     color: Colors.green,
-                                    size: 50,
+                          size: 48,
                                   ),
-                                  SizedBox(
-                                    width: 20,
-                                    height: 150,
                                   ),
                                 ],
                               ),
-                            ],
-                          ))
+                ),
+                flex: 1,
+              ),
                     ],
                   ),
-                )
-              ]),
-            ),
           ),
         ),
-      )
     );
   }
 }

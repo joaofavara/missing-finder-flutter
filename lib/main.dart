@@ -3,7 +3,7 @@ import 'screen/PessoaAchadaAnuncio.dart';
 import 'screen/PessoaDesaparecidaAnuncio.dart';
 import 'screen/mapScreen.dart';
 import 'screen/AdicionarAnuncio.dart';
-import 'screen/Home.dart';
+import 'Screen/Home.dart';
 import 'screen/InstrucoesFoto.dart';
 import 'screen/Profile.dart';
 import 'screen/Similaridades.dart';

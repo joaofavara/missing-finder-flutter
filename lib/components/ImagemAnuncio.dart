@@ -12,21 +12,34 @@ class ImagemAnuncio extends StatelessWidget {
     return Card(
       color: Colors.grey[200],
       child: Container(
-        padding: EdgeInsets.all(5),
         child: Column(children: <Widget>[
-          Image.network(
-              imagem,
-              height: 300,
-              fit: BoxFit.fitWidth),
-          Text(
-            '$nome, $idade',
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(fontSize: 25),
+          Row(
+            children: [
+              Expanded(
+                child: Image.network(
+                  imagem,
+                  height: 300,
+                  fit: BoxFit.fitWidth),
+                  ),
+            ],
           ),
-          // Text(
-          //   "34 anos",
-          //   style: TextStyle(fontSize: 22),
-          // ),
+          Row(
+            children: [
+              Expanded(
+                child: Padding (
+                  padding: EdgeInsets.symmetric(vertical: 12.0),
+                  child: Align (
+                    alignment: Alignment.center,
+                    child: Text(
+                      '$nome, $idade',
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontSize: 25),
+                    ),
+                  ),
+                )
+              ),
+            ],
+          ),
         ]),
       ),
     );
