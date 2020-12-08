@@ -23,7 +23,7 @@ class LoginPageState extends State<Login> {
         'Basic ' + base64Encode(utf8.encode('$username:$password'));
     print(basicAuth);
 
-    Response r = await get('http://localhost:5000/api/authentication',
+    Response r = await get('http://10.0.2.2:5000/api/authentication',
         headers: <String, String>{'authorization': basicAuth});
     print(r.statusCode);
     print(r.body);

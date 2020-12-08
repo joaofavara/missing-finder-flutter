@@ -29,9 +29,11 @@ class SignUpPageState extends State<SignUp> {
   }
 
   void signUpAuthService(ApplicationUser user) async {
-    Response r = await post('http://localhost:5000/api/users',
+    Response r = await post('http://10.0.2.2:5000/api/users',
         headers: {HttpHeaders.contentTypeHeader: "application/json"},
         body: jsonEncode(user));
+
+    print(r.statusCode);
 
     if(r.statusCode == HttpStatus.accepted) {
       Navigator.push(
@@ -152,21 +154,18 @@ class SignUpPageState extends State<SignUp> {
               },
             ),
             Divider(),
-            Expanded(
-              flex: 0,
-              child: FlatButton(
-                onPressed: () {
-                  if(_formKey.currentState.validate()){
-                    signUp(context);
-                  }
-                },
-                child: Text("Registrar"),
-                color: Colors.blue,
-                padding: EdgeInsets.all(10),
-                textColor: Colors.white,
-                shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(30.0)),
-              ),
+            FlatButton(
+              onPressed: () {
+                if(_formKey.currentState.validate()){
+                  signUp(context);
+                }
+              },
+              child: Text("Registrar"),
+              color: Colors.blue,
+              padding: EdgeInsets.all(10),
+              textColor: Colors.white,
+              shape: new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(30.0)),
             ),
           ],
         ),
