@@ -115,7 +115,7 @@ class _FormularioComponentPessoaAchada extends State<FormularioComponentPessoaAc
                   },
                   validator: (value) {
                     if (value.isEmpty) {
-                      return 'Please enter some text';
+                      return 'Este campo deve ser preenchido';
                     }
                     nome = value;
                     return null;
@@ -130,7 +130,7 @@ class _FormularioComponentPessoaAchada extends State<FormularioComponentPessoaAc
                   },
                   validator: (value) {
                     if (value.isEmpty) {
-                      return 'Please enter some text';
+                      return 'Este campo deve ser preenchido';
                     }
                     idade = value;
                     return null;
@@ -191,7 +191,7 @@ class _FormularioComponentPessoaAchada extends State<FormularioComponentPessoaAc
                   ),
                   validator: (value) {
                     if (value.isEmpty) {
-                      return 'Please enter some text';
+                      return 'Este campo deve ser preenchido';
                     }
                     mensagemDeAviso = value;
                     return null;
@@ -201,25 +201,39 @@ class _FormularioComponentPessoaAchada extends State<FormularioComponentPessoaAc
                   children: <Widget>[
                     SizedBox(height: 10, width: 100),
                     Container(
-                      child: _previewImageUrl == null ? Text('Localizacao nao informada') : 
+                      child: _previewImageUrl == null ? Text('Localização não informada') : 
                       Image.network(
                         _previewImageUrl,
                       ),
                     ),
                     Row(
                       children: [
-                        FlatButton.icon(
-                          onPressed: _getCurrentUserLocation,
-                          icon: Icon(Icons.location_on),
-                          label: Text('Localização Atual'),
-                          textColor: Theme.of(context).primaryColor,
+                        Expanded(
+                          child: FlatButton.icon(
+                            onPressed: _getCurrentUserLocation,
+                            icon: Icon(Icons.location_on),
+                            label: Expanded(
+                              child: Text(
+                                'Localização atual',
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                            textColor: Theme.of(context).primaryColor,
+                          ),
                         ),
-                        FlatButton.icon(
-                          onPressed: _selectOnMap,
-                          icon: Icon(Icons.map),
-                          label: Text('Selecione no Mapa'),
-                          textColor: Theme.of(context).primaryColor,
-                        )
+                        Expanded(
+                          child: FlatButton.icon(
+                            onPressed: _selectOnMap,
+                            icon: Icon(Icons.map),
+                            label: Expanded(
+                              child: Text(
+                                'Selecione no mapa',
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                            textColor: Theme.of(context).primaryColor,
+                          ),
+                        ),
                       ],
                     )
                   ],
@@ -256,7 +270,7 @@ class _FormularioComponentPessoaAchada extends State<FormularioComponentPessoaAc
                         }
                       }
                     },
-                    child: Text('Submit'),
+                    child: Text('Enviar'),
                   ),
                 ),
               ],

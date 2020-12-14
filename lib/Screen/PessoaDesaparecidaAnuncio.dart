@@ -52,14 +52,14 @@ class PessoaDesaparecida extends StatelessWidget {
                         // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         // crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Informacoes('${data.nome}\n${data.parentesco}', 70.0,  Icon(
+                          Informacoes('${data.nome}\n${data.parentesco}', 60.0,  Icon(
                             Icons.account_circle,
-                            color: Colors.black,
+                            color: Colors.blue[800],
                             size: 20.0,
                           ),),
-                          Informacoes('${data.user.telefone}\nCelular', 70.0,  Icon(
+                          Informacoes('${data.user.telefone}\nCelular', 60.0,  Icon(
                             Icons.phone,
-                            color: Colors.black,
+                            color: Colors.blue[800],
                             size: 20.0,
                           ),)
                         ]
@@ -68,26 +68,26 @@ class PessoaDesaparecida extends StatelessWidget {
                         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         // crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Informacoes('${data.user.email}', 70.0,  Icon(
+                          Informacoes('${data.user.email}', 60.0,  Icon(
                             Icons.email,
-                            color: Colors.black,
+                            color: Colors.blue[800],
                             size: 20.0,
                           ),),
-                          Informacoes('21/03/2020', 70.0,  Icon(
+                          Informacoes('21/03/2020', 60.0,  Icon(
                             Icons.calendar_today,
-                            color: Colors.black,
+                            color: Colors.blue[800],
                             size: 20.0,
                           ),)
                         ]
                       ),
-                      Informacoes('${data.mensagemDeAviso}', 70.0,  Icon(
+                      Informacoes('${data.mensagemDeAviso}', 60.0,  Icon(
                         Icons.warning,
-                        color: Colors.black,
+                        color: Colors.blue[800],
                         size: 20.0,
                       ),),
-                      Informacoes('${data.mensagemParaDesaparecido}', 70.0,  Icon(
+                      Informacoes('${data.mensagemParaDesaparecido}', 60.0,  Icon(
                         Icons.message,
-                        color: Colors.black,
+                        color: Colors.blue[800],
                         size: 20.0,
                       ),),
                       Card (
@@ -99,7 +99,7 @@ class PessoaDesaparecida extends StatelessWidget {
                               child: Image.network(
                               data.endereco.imageUrl, 
                               width: 350,
-                              height: 125,
+                              height: 80,
                               fit: BoxFit.cover
                             ),
                               flex: 4,
@@ -107,7 +107,7 @@ class PessoaDesaparecida extends StatelessWidget {
                             Expanded(
                               child: Icon(
                               Icons.arrow_forward,
-                              color: Colors.black,
+                              color: Colors.blue[800],
                               size: 32.0,
                             ),
                               flex: 1,

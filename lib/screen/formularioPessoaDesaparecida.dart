@@ -34,11 +34,11 @@ class _FormularioComponentPessoaDesaparecida extends State<FormularioComponentPe
       barrierDismissible: true, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Anuncio criado com sucesso!'),
+          title: Text('Anúncio criado com sucesso!'),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text('Poderá ver seu anuncios dentro do seu perfil.'),
+                Text('Poderá ver seus anúncios dentro do seu perfil.'),
               ],
             ),
           ),
@@ -133,7 +133,7 @@ class _FormularioComponentPessoaDesaparecida extends State<FormularioComponentPe
                   },
                   validator: (value) {
                     if (value.isEmpty) {
-                      return 'Please enter some text';
+                      return 'Este campo deve ser preenchido';
                     }
                     nome = value;
                     return null;
@@ -154,56 +154,87 @@ class _FormularioComponentPessoaDesaparecida extends State<FormularioComponentPe
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          Text("${dataDeAniversario.toLocal()}".split(' ')[0]),
-                          SizedBox(height: 20.0,),
-                          RaisedButton(
-                            onPressed: () => _dataDeAniversario(context),
-                            child: Text('Data de Aniversario'),
-                          ),
-                        ],
-                      )
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 20.0),
+                        child: Text(
+                          "${dataDeAniversario.toLocal()}".split(' ')[0],
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          Text("${dataDoDesaparecimento.toLocal()}".split(' ')[0]),
-                          SizedBox(height: 20.0,),
-                          RaisedButton(
-                            onPressed: () => _dataDoDesaparecimento(context),
-                            child: Text('Data Desaparecimento'),
-                          ),
-                        ],
-                      )
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 20.0),
+                        child: Text(
+                          "${dataDoDesaparecimento.toLocal()}".split(' ')[0],
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
                     ),
                   ]
                 ),
-                DropdownButton(
-                  value: parentesco,
-                  items: parentescos.asMap().entries.map((parentesco) {
-                      return DropdownMenuItem(
-                        child: Text(parentesco.value),
-                        value: (parentesco.key),
-                      );
-                  }).toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      parentesco = value;
-                    });
-                }),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child:  Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                        child: RaisedButton(
+                          onPressed: () => _dataDeAniversario(context),
+                          child: Text(
+                            'Data de aniversário',
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                        child: RaisedButton(
+                          onPressed: () => _dataDoDesaparecimento(context),
+                          child: Text(
+                            'Data de desaparecimento',
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ]
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text('Parentesco:'),
+                        flex: 1
+                    ),
+                    Expanded(
+                      child: DropdownButton(
+                        isExpanded: true,
+                        value: parentesco,
+                        items: parentescos.asMap().entries.map((parentesco) {
+                            return DropdownMenuItem(
+                              child: Text(parentesco.value),
+                              value: (parentesco.key),
+                            );
+                        }).toList(),
+                        onChanged: (value) {
+                          setState(() {
+                            parentesco = value;
+                          });
+                      }),
+                      flex: 2
+                    ),
+                  ],
+                ),
                 TextFormField(
                   decoration: const InputDecoration(
                     hintText: 'Descrição',
                   ),
                   validator: (value) {
                     if (value.isEmpty) {
-                      return 'Please enter some text';
+                      return 'Este campo deve ser preenchido';
                     }
                     descricao = value;
                     return null;
@@ -215,7 +246,7 @@ class _FormularioComponentPessoaDesaparecida extends State<FormularioComponentPe
                   ),
                   validator: (value) {
                     if (value.isEmpty) {
-                      return 'Please enter some text';
+                      return 'Este campo deve ser preenchido';
                     }
                     mensagem = value;
                     return null;
@@ -225,25 +256,39 @@ class _FormularioComponentPessoaDesaparecida extends State<FormularioComponentPe
                   children: <Widget>[
                     SizedBox(height: 10, width: 100),
                     Container(
-                      child: _previewImageUrl == null ? Text('Localizacao nao informada') : 
+                      child: _previewImageUrl == null ? Text('Localização não informada') : 
                       Image.network(
                         _previewImageUrl,
                       ),
                     ),
                     Row(
                       children: [
-                        FlatButton.icon(
-                          onPressed: _getCurrentUserLocation,
-                          icon: Icon(Icons.location_on),
-                          label: Text('Localização Atual'),
-                          textColor: Theme.of(context).primaryColor,
+                        Expanded(
+                          child: FlatButton.icon(
+                            onPressed: _getCurrentUserLocation,
+                            icon: Icon(Icons.location_on),
+                            label: Expanded(
+                              child: Text(
+                                'Localização atual',
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                            textColor: Theme.of(context).primaryColor,
+                          )
                         ),
-                        FlatButton.icon(
-                          onPressed: _selectOnMap,
-                          icon: Icon(Icons.map),
-                          label: Text('Selecione no Mapa'),
-                          textColor: Theme.of(context).primaryColor,
-                        )
+                        Expanded(
+                          child: FlatButton.icon(
+                            onPressed: _selectOnMap,
+                            icon: Icon(Icons.map),
+                            label: Expanded(
+                              child: Text(
+                                'Selecione no mapa',
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                            textColor: Theme.of(context).primaryColor,
+                          )
+                        ),
                       ],
                     )
                   ],
@@ -282,7 +327,7 @@ class _FormularioComponentPessoaDesaparecida extends State<FormularioComponentPe
                         }
                       }
                     },
-                    child: Text('Submit'),
+                    child: Text('Enviar'),
                   ),
                 ),
               ],

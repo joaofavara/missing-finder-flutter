@@ -73,44 +73,40 @@ class _MainPage extends State<MainPage>{
                   crossAxisCount: 2, //Grid com 2 colunas
                   children: List.generate(newsList.length, (index) {
                     return Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(2.0),
                       child: new InkResponse(
                         child: Stack(
                           children: <Widget> [
-                            Image.network(
-                              newsList[index]['url_imagem'], 
-                              width: 500,
-                              height: 500,
-                              fit: BoxFit.cover
+                            Container(
+                              decoration: new BoxDecoration(
+                                shape: BoxShape.rectangle,
+                                image: new DecorationImage(
+                                fit: BoxFit.cover,
+                                image: new NetworkImage(newsList[index]['url_imagem'])),
+                              ),
                             ),
                             Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  Container (
-                                    height: 35,
-                                    // width: 20,
-                                    child: Card(
-                                      color: Colors.grey[350].withOpacity(0.6),
-                                      child: Row (
-                                        // crossAxisAlignment: CrossAxisAlignment.start,
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          // Container(
-                                          //   margin: const EdgeInsets.all(20.0),
-                                          // ),
-                                          Text(
-                                            '${newsList[index]['nome']}, ${newsList[index]['idade']}',
-                                            style: TextStyle(
-                                              fontFamily: 'Arial',
-                                              fontSize: 10.0,
-                                              fontWeight: FontWeight.w600
-                                            )
-                                            // style: TextStyle(height: 2, fontSize: 1),
-                                          ),
-                                        ],
-                                      )
+                                  Expanded(
+                                    child: Container(),
+                                    flex: 4,
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      color: Colors.black.withAlpha(180),
+                                      child:  Text(
+                                        '${newsList[index]['nome']}, ${newsList[index]['idade']}',
+                                        style: TextStyle(
+                                          fontFamily: 'Arial',
+                                          fontSize: 14.0,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.white.withAlpha(200)
+                                        )
+                                        // style: TextStyle(height: 2, fontSize: 1),
+                                      ),
                                     ),
+                                    flex: 1,
                                   ),
                                 // ),
                               ],

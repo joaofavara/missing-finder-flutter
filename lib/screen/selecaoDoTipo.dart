@@ -25,7 +25,7 @@ class SelecaoDoTipo extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             FlatButton(
-              child: Text('Uma pessoas esta desaparecida!'),
+              child: Text('Uma pessoa está desaparecida.'),
               color: Colors.blue,
               onPressed: () => goToFormDesaparecida(context),
             ),

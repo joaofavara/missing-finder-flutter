@@ -14,16 +14,18 @@ class Informacoes extends StatelessWidget {
       child: Container (
         height: heightForField,
         child: Card(
-          color: Colors.blue,
+          color: Colors.blue[200].withOpacity(0.8),
           child: Row (
             children: [
               Container(
                 margin: const EdgeInsets.only(left: 10.0, right: 10.0),
                 child: icon
               ),
-              Text(
-                data,
-              ),
+              Expanded(
+                child: Text(
+                  data,
+                ),
+              )
             ],
           )
         ),

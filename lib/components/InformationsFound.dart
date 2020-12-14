@@ -16,9 +16,11 @@ class InformationsFound extends StatelessWidget {
           margin: const EdgeInsets.only(left: 10.0, right: 10.0),
           child: icon
         ),
-        Text(
-          data,
-        ),
+        Expanded(
+          child: Text(
+            data,
+          ),
+        )
       ],
     );
   }

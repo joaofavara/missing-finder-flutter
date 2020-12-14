@@ -5,8 +5,9 @@ import 'package:http/http.dart' as http;
 
 // ignore: must_be_immutable
 class CardSimilaridade extends StatelessWidget {
-    CardSimilaridade(this.similaridade); /* Esse é o creator que vai receber os dados */
-    var similaridade;
+  CardSimilaridade(
+      this.similaridade); /* Esse é o creator que vai receber os dados */
+  var similaridade;
 
   Future<void> goToAddAnuncio(BuildContext context) async {
     Navigator.of(context).pushNamed(
@@ -14,18 +15,16 @@ class CardSimilaridade extends StatelessWidget {
     );
   }
 
-  Future<void> goToAnuncioPessoaDesaparecida(BuildContext context, int anuncioId) async {
-    Navigator.of(context).pushNamed(
-      '/anuncio_pessoa_desaparecida',
-      arguments: anuncioId
-    );
+  Future<void> goToAnuncioPessoaDesaparecida(
+      BuildContext context, int anuncioId) async {
+    Navigator.of(context)
+        .pushNamed('/anuncio_pessoa_desaparecida', arguments: anuncioId);
   }
 
-  Future<void> goToAnuncioPessoaAchada(BuildContext context, int anuncioId) async {
-    Navigator.of(context).pushNamed(
-      '/anuncio_pessoa_achada',
-      arguments: anuncioId
-    );
+  Future<void> goToAnuncioPessoaAchada(
+      BuildContext context, int anuncioId) async {
+    Navigator.of(context)
+        .pushNamed('/anuncio_pessoa_achada', arguments: anuncioId);
   }
 
   String getImage(String argumentos) {
@@ -70,21 +69,20 @@ class CardSimilaridade extends StatelessWidget {
     );
 
     Widget continueButton = FlatButton(
-      child: Text(
-        "SIM",
-        style: TextStyle(fontWeight: FontWeight.bold),
-      ),
-      onPressed: () async {
-        const url = 'http://10.0.2.2:5000/api/notifications/detected-person';
-        var body = {"posterId": anuncioId, "type": tipo, "userId": 1};
-        print(json.encode(body));
-        var response = await http.post(url, body: json.encode(body));
+        child: Text(
+          "SIM",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        onPressed: () async {
+          const url = 'http://10.0.2.2:5000/api/notifications/detected-person';
+          var body = {"posterId": anuncioId, "type": tipo, "userId": 1};
+          print(json.encode(body));
+          var response = await http.post(url, body: json.encode(body));
 
-        print(response);
+          print(response);
 
-        showAlertDialog(context);
-      }
-    );
+          showAlertDialog(context);
+        });
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
@@ -124,49 +122,19 @@ class CardSimilaridade extends StatelessWidget {
     print('similaridade: $similaridade');
     print(similaridade.image);
     return Container(
-        height: 200,
-        width: double.maxFinite,
-        child: Card(
-          elevation: 5,
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border(
-                top: BorderSide(width: 2.0, color: Colors.blue),
-              ),
-              color: Colors.white,
+      height: 200,
+      width: double.maxFinite,
+      child: Card(
+        elevation: 5,
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border(
+              top: BorderSide(width: 2.0, color: Colors.blue),
             ),
+            color: Colors.white,
+          ),
           child: Row(
             children: <Widget>[
-              Expanded(
-            child: Padding(
-                    padding: EdgeInsets.all(16.0),
-                          child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                          Row(children: <Widget>[
-                            Text(
-                              'SIMILARIDADE:',
-                              style: TextStyle(
-                                  color: Colors.blueGrey,
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ]),
-                              Row(
-                            children: [
-                                  Text(
-                                '${similaridade.similarity}%',
-                                    style: TextStyle(
-                                        color: Colors.blueGrey,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
-                        ])),
-                flex: 2,
-              ),
               Expanded(
                 child: InkWell(
                   onTap: () => similaridade.type == 'DESAPARECIDA'
@@ -180,34 +148,64 @@ class CardSimilaridade extends StatelessWidget {
                             fit: BoxFit.fill,
                             image:
                                 new NetworkImage(getImage(similaridade.image))),
-                                      ),
-                                  ),
+                      ),
+                    ),
                     Column(
                       children: [
                         Expanded(
                           child: Container(),
                           flex: 4,
-                                              ),
+                        ),
                         Expanded(
-                                              child: Container(
+                          child: Container(
                             alignment: Alignment.center,
                             color: Colors.black.withAlpha(180),
-                                                child: Text(
-                                                  '${similaridade.name}, ${similaridade.age}',
-                                                  overflow: TextOverflow.clip,
+                            child: Text(
+                              '${similaridade.name}, ${similaridade.age}',
+                              overflow: TextOverflow.clip,
                               style: TextStyle(
                                 color: Colors.white.withAlpha(200),
                               ),
                             ),
-                                                ),
+                          ),
                           flex: 1,
-                                            )
-                                          ],
-                                        ),
+                        )
+                      ],
+                    ),
                   ]),
                 ),
                 flex: 3,
-                                          ),
+              ),
+              Expanded(
+                child: Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Row(children: <Widget>[
+                            Text(
+                              'SIMILARIDADE:',
+                              style: TextStyle(
+                                  color: Colors.blueGrey,
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ]),
+                          Row(
+                            children: [
+                              Text(
+                                '${similaridade.similarity}%',
+                                style: TextStyle(
+                                    color: Colors.blueGrey,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ])),
+                flex: 2,
+              ),
               Expanded(
                 child: InkWell(
                   onTap: () => showConfirmationDialog(context, similaridade.id,
@@ -218,20 +216,20 @@ class CardSimilaridade extends StatelessWidget {
                     children: <Widget>[
                       Expanded(
                         child: Icon(
-                                    Icons.check,
-                                    color: Colors.green,
+                          Icons.check,
+                          color: Colors.green,
                           size: 48,
-                                  ),
-                                  ),
-                                ],
-                              ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 flex: 1,
               ),
-                    ],
-                  ),
+            ],
           ),
         ),
+      ),
     );
   }
 }
