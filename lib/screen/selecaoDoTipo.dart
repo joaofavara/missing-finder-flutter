@@ -24,15 +24,49 @@ class SelecaoDoTipo extends StatelessWidget {
         child: Column (
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            FlatButton(
-              child: Text('Uma pessoa está desaparecida.'),
-              color: Colors.blue,
-              onPressed: () => goToFormDesaparecida(context),
+            Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: FlatButton(
+                      child: Text(
+                        'Uma pessoa está desaparecida.',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      color: Colors.blue,
+                      onPressed: () => goToFormDesaparecida(context),
+                      height: 50.0,
+                    ),
+                  ),
+                ),
+              ],
             ),
-            FlatButton(
-              child: Text('Encontrei uma pessoa!'),
-              color: Colors.blue,
-              onPressed: () => goToFormAchada(context),
+            Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: FlatButton(
+                      child: Text(
+                        'Encontrei uma pessoa!',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      color: Colors.blue,
+                      onPressed: () => goToFormAchada(context),
+                      height: 50.0,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
