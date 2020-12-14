@@ -2,12 +2,14 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
 class CardSimilaridade extends StatelessWidget {
   CardSimilaridade(
       this.similaridade); /* Esse é o creator que vai receber os dados */
   var similaridade;
+  final formatter = new NumberFormat("###.00#", "pt_BR");
 
   Future<void> goToAddAnuncio(BuildContext context) async {
     Navigator.of(context).pushNamed(
@@ -195,7 +197,7 @@ class CardSimilaridade extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                '${similaridade.similarity}%',
+                                '${formatter.format(double.parse(similaridade.similarity))}%',
                                 style: TextStyle(
                                     color: Colors.blueGrey,
                                     fontSize: 20,
