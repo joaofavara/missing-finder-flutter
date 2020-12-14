@@ -19,7 +19,7 @@ class InstrucoesFoto extends StatelessWidget {
       appBar: AppBar(
         title: Text('Missing Finder'),
       ),
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.grey[300],
       bottomNavigationBar: BottomAppBar(
         color: Colors.blue,
         child: Row(
@@ -45,17 +45,13 @@ class InstrucoesFoto extends StatelessWidget {
       body: Container(
         margin: EdgeInsets.all(8.0),
         padding: EdgeInsets.all(8.0),
-        decoration: BoxDecoration(
-          color: Colors.grey,
-          border: Border.all(),
-        ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Row(
               children: [
                 Text(
-                  'Sugestões:',
+                  'Instruções:',
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 20,
@@ -71,7 +67,7 @@ class InstrucoesFoto extends StatelessWidget {
                 horizontal: 0,
               ),
               child: Text(
-                '1. Enquadre toda a face, cortando a foto um pouco acima do peito',
+                '1. Enquadre toda a face, cortando a foto um pouco acima do peito;',
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 15,
@@ -86,7 +82,7 @@ class InstrucoesFoto extends StatelessWidget {
                 horizontal: 0,
               ),
               child: Text(
-                '2. Certifique-se que a pessoa está com os olhos abertos.',
+                '2. Certifique-se de que a pessoa esteja com os olhos abertos;',
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 15,
@@ -119,10 +115,21 @@ class InstrucoesFoto extends StatelessWidget {
                 ),
               ],
             ),
-            Image.asset(
-              'assets/imagens/Obama.jpg',
-              width: 200,
-              height: 270,
+            Padding(
+                padding: EdgeInsets.symmetric(vertical: 30.0),
+                child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(),
+                ),
+                child: Expanded (
+                  child: Image.asset(
+                    'assets/imagens/Obama.jpg',
+                    fit: BoxFit.cover
+                  ),
+                ),
+                height: 250,
+                width: 200,
+              ),
             ),
           ],
         ),
