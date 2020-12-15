@@ -147,7 +147,7 @@ class CardSimilaridade extends StatelessWidget {
                       decoration: new BoxDecoration(
                         shape: BoxShape.rectangle,
                         image: new DecorationImage(
-                            fit: BoxFit.fill,
+                            fit: BoxFit.cover,
                             image:
                                 new NetworkImage(getImage(similaridade.image))),
                       ),
