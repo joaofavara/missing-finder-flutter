@@ -44,7 +44,7 @@ class _FormularioComponentPessoaDesaparecida extends State<FormularioComponentPe
           ),
           actions: <Widget>[
             FlatButton(
-              child: Text('Confirmação'),
+              child: Text('OK'),
               onPressed: () {
                 Navigator.of(context).popUntil((r) => r.isFirst);
               },
@@ -183,7 +183,7 @@ class _FormularioComponentPessoaDesaparecida extends State<FormularioComponentPe
                         child: RaisedButton(
                           onPressed: () => _dataDeAniversario(context),
                           child: Text(
-                            'Data de aniversário',
+                            'Data de nascimento',
                             textAlign: TextAlign.center,
                           ),
                         ),

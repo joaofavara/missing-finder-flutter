@@ -40,7 +40,7 @@ class _FormularioComponentPessoaAchada extends State<FormularioComponentPessoaAc
           ),
           actions: <Widget>[
             FlatButton(
-              child: Text('Confirmação'),
+              child: Text('OK'),
               onPressed: () {
                 Navigator.of(context).popUntil((r) => r.isFirst);
               },
