@@ -30,11 +30,11 @@ class _FormularioComponentPessoaAchada extends State<FormularioComponentPessoaAc
       barrierDismissible: true, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Anuncio criado com sucesso!'),
+          title: Text('Anúncio criado com sucesso!'),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text('Poderá ver seu anuncios dentro do seu perfil.'),
+                Text('Poderá ver seu anúncios dentro do seu perfil.'),
               ],
             ),
           ),
